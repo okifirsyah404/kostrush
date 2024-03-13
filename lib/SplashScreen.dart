@@ -1,17 +1,77 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kostrushapp/Detail_Profil.dart';
-import 'package:kostrushapp/Layout/Style/StyleApp.dart';
-import 'package:kostrushapp/Layout/Widget/ButtonStyles.dart';
-import 'package:kostrushapp/Layout/Widget/PasswordFormFieldStyles.dart';
-import 'package:kostrushapp/Layout/Widget/TextFormFieldStyles.dart';
-import 'package:kostrushapp/Layout/Widget/TextStyles.dart';
-import 'package:kostrushapp/LupaSandi.dart';
-import 'package:kostrushapp/Register.dart';
-import 'package:kostrushapp/Sandi_baru.dart';
-import 'package:kostrushapp/SplashScreen.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:kostrushapp/BuatSandi.dart';
 import 'package:kostrushapp/EditProfil.dart';
-import 'SandiBaru.dart';
+import 'package:kostrushapp/KodeOTP.dart';
+import 'package:kostrushapp/Login.dart';
+import 'package:kostrushapp/Pemesanan.dart';
+import 'package:kostrushapp/Register.dart';
+import 'package:kostrushapp/SandiBaru.dart';
+
+import 'Layout/Style/StyleApp.dart';
+import 'Layout/Widget/ButtonStyles.dart';
+import 'Layout/Widget/PasswordFormFieldStyles.dart';
+import 'Layout/Widget/TextFormFieldStyles.dart';
+import 'Layout/Widget/TextStyles.dart';
+import 'LupaSandi.dart';
+import 'VerifikasiBerhasil.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      Duration(seconds: 3),
+          () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 10,),
+            Image.asset("assets/images/logo.png"),
+            const SizedBox(height: 10,),
+            Text(
+              "KostRush",
+              style: TextStyle(fontSize: 24),
+            ),
+            // ... (other elements in your SplashScreen UI)
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -178,4 +238,3 @@ class _LoginState extends State<Login> {
     );
   }
 }
-

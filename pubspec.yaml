@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  font_awesome_flutter: ^9.1.0
   pin_input_text_field:
   flutter_native_splash:
   cloud_firestore:
@@ -46,6 +47,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_rating_bar: ^4.0.0
+
+
 
 dev_dependencies:
   flutter_test:

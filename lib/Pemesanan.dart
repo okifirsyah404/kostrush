@@ -10,16 +10,17 @@ import 'package:kostrushapp/Layout/Widget/TextStyles.dart';
 
 import 'Login.dart';
 
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+class Pemesanan extends StatefulWidget {
+  const Pemesanan({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _Register();
+  State<Pemesanan> createState() => _Pemesanan();
 }
 
-class _Register extends State<Register> {
+class _Pemesanan extends State<Pemesanan> {
   bool _obscuretext = true;
   final TextEditingController _NamaController = TextEditingController();
+  final TextEditingController _NikController = TextEditingController();
   final TextEditingController _PekerjaanController = TextEditingController();
   final TextEditingController _AlamatController = TextEditingController();
   final TextEditingController _NoController = TextEditingController();
@@ -36,15 +37,17 @@ class _Register extends State<Register> {
             // Handle back button press
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => Login()), // Gantilah dengan class halaman login yang sebenarnya
+              MaterialPageRoute(builder: (context) => Login()), // Replace with the actual login page class
             );
           },
         ),
-        title: Text(
-          "Daftarkan Akun Anda",
-          style: TextStyle(fontWeight: FontWeight.bold), // Menambah properti TextStyle untuk membuat teks menjadi bold
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Align to the left edge (optional)
+          children: <Widget>[
+            Text("Pemesanan"),
+            Spacer(), // Add Spacer to fill remaining space
+          ],
         ),
-        backgroundColor: Colors.purple.shade300, // Mengubah warna menjadi ungu
       ),
 
       body: SafeArea(
@@ -57,11 +60,8 @@ class _Register extends State<Register> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Silahkan lengkapi pendaftaran akun",
-                    style: StyleApp.mediumTextStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0, // Ubah nilai ini untuk memperbesar font
-                    ),
+                    "Silahkan lengkapi formulir dibawah ini",
+                    style: StyleApp.mediumTextStyle.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 20,),
@@ -71,6 +71,19 @@ class _Register extends State<Register> {
                       controller: _NamaController,
                       labelText: "Nama Lengkapmu",
                       icon: Icon(Icons.account_circle_outlined),
+                      borderColor: Colors.grey,
+                      borderRadius: BorderRadius.circular(6),
+                      borderAnimationColor: Colors.purple.shade800,
+                      borderAnimationRadius: 6,
+                    )
+                ),
+                const SizedBox(height: 10,),
+                Align(
+                    alignment: Alignment.center,
+                    child: AnimateTextField(
+                      controller: _NikController,
+                      labelText: "NIK Mu",
+                      icon: Icon(Icons.numbers),
                       borderColor: Colors.grey,
                       borderRadius: BorderRadius.circular(6),
                       borderAnimationColor: Colors.purple.shade800,
@@ -131,26 +144,6 @@ class _Register extends State<Register> {
                 ),
                 const SizedBox(height: 10,),
                 Align(
-                  alignment: Alignment.centerLeft, // Align to the left
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: _agreedToTerms,
-                        onChanged: (value) {
-                          setState(() {
-                            _agreedToTerms = value!;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Dengan ini Anda telah menyetujui\nKebijakan & Privasi Layanan Kami.",
-                        style: StyleApp.smallTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10,),
-                Align(
                   alignment: Alignment.center,
                   child: AnimateProgressButton(
                     labelButton: "Lanjut",
@@ -167,7 +160,7 @@ class _Register extends State<Register> {
                         // You may use Get.snackbar or any other method to show a message
                         Get.snackbar(
                           "Error",
-                          "Harap setujui persyaratannya sebelum melanjutkan.",
+                          "Please agree to the terms before proceeding.",
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );

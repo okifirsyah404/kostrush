@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/Login.dart';
+import 'package:kostrushapp/Page/home_page.dart';
+import 'package:kostrushapp/SplashScreen.dart';
+import 'package:kostrushapp/TentangKami.dart';
 
 
 void main() {
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login(),
+      home: SplashScreen(),
     );
   }
 }

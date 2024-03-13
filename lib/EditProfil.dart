@@ -10,21 +10,21 @@ import 'package:kostrushapp/Layout/Widget/TextStyles.dart';
 
 import 'Login.dart';
 
-class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+class EditProfil extends StatefulWidget {
+  const EditProfil({Key? key}) : super(key: key);
 
   @override
-  State<Register> createState() => _Register();
+  State<EditProfil> createState() => _EditProfil();
 }
 
-class _Register extends State<Register> {
+class _EditProfil extends State<EditProfil> {
   bool _obscuretext = true;
   final TextEditingController _NamaController = TextEditingController();
   final TextEditingController _PekerjaanController = TextEditingController();
   final TextEditingController _AlamatController = TextEditingController();
   final TextEditingController _NoController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  bool _agreedToTerms = false;
+  final bool _agreedToTerms = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +36,15 @@ class _Register extends State<Register> {
             // Handle back button press
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => Login()), // Gantilah dengan class halaman login yang sebenarnya
+              MaterialPageRoute(builder: (context) => Login()),
             );
           },
         ),
         title: Text(
-          "Daftarkan Akun Anda",
-          style: TextStyle(fontWeight: FontWeight.bold), // Menambah properti TextStyle untuk membuat teks menjadi bold
+          "Edit Profil",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.purple.shade300, // Mengubah warna menjadi ungu
+        backgroundColor: Colors.purple.shade300,
       ),
 
       body: SafeArea(
@@ -54,13 +54,56 @@ class _Register extends State<Register> {
             child: Column(
               children: [
                 const SizedBox(height: 10,),
-                Align(
-                  alignment: Alignment.center,
+                // Tambahkan widget untuk foto profil
+            InkWell(
+              onTap: () {
+                // Tambahkan logika untuk mengganti atau mengedit foto profil
+                // Misalnya, tampilkan dialog atau navigasi ke halaman pengaturan foto profil
+                // Di sini, saya hanya menampilkan pesan di console
+                print("Edit Foto Profil");
+              },
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.grey,
+                    child: Icon(
+                      Icons.camera_enhance_outlined,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.purple.shade800,
+                      ),
+                      child: Icon(
+                        Icons.camera,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+                const SizedBox(height: 8,),
+                InkWell(
+                  onTap: () {
+                    // Tambahkan logika untuk mengganti atau mengedit foto profil
+                    // Misalnya, tampilkan dialog atau navigasi ke halaman pengaturan foto profil
+                    // Di sini, saya hanya menampilkan pesan di console
+                    print("Edit Foto Profil");
+                  },
                   child: Text(
-                    "Silahkan lengkapi pendaftaran akun",
-                    style: StyleApp.mediumTextStyle.copyWith(
+                    "Tambah Foto",
+                    style: TextStyle(
+                      color: Colors.purple.shade800,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18.0, // Ubah nilai ini untuk memperbesar font
                     ),
                   ),
                 ),
@@ -131,51 +174,20 @@ class _Register extends State<Register> {
                 ),
                 const SizedBox(height: 10,),
                 Align(
-                  alignment: Alignment.centerLeft, // Align to the left
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: _agreedToTerms,
-                        onChanged: (value) {
-                          setState(() {
-                            _agreedToTerms = value!;
-                          });
-                        },
-                      ),
-                      Text(
-                        "Dengan ini Anda telah menyetujui\nKebijakan & Privasi Layanan Kami.",
-                        style: StyleApp.smallTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10,),
-                Align(
                   alignment: Alignment.center,
                   child: AnimateProgressButton(
-                    labelButton: "Lanjut",
+                    labelButton: "Simpan",
                     labelProgress: "Memproses",
                     labelButtonStyle: StyleApp.largeTextStyle.copyWith(color: Colors.white),
                     height: 50,
                     containerColor: Colors.purple.shade800,
                     containerRadius: 6,
                     onTap: () async {
-                      if (_agreedToTerms) {
-                        Get.to(BuatSandi());
-                      } else {
-                        // Show some message indicating that terms should be agreed
-                        // You may use Get.snackbar or any other method to show a message
-                        Get.snackbar(
-                          "Error",
-                          "Harap setujui persyaratannya sebelum melanjutkan.",
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white,
-                        );
-                      }
                     },
                   ),
                 ),
                 const SizedBox(height: 20,),
+                // ... (Bagian kode lainnya tetap sama)
               ],
             ),
           ),
@@ -184,4 +196,3 @@ class _Register extends State<Register> {
     );
   }
 }
-

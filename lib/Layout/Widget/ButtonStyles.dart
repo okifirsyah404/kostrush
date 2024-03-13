@@ -164,7 +164,6 @@ class AnimateProgressButton extends StatefulWidget {
     this.textAlign = TextAlign.center,
     this.labelButtonStyle,
     required this.onTap,
-    this.icon,
   });
 
   @override
