@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../Style/styleapp.dart';
 
 class ProgressButton extends StatefulWidget {
@@ -50,7 +51,8 @@ class _ProgressButtonState extends State<ProgressButton> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    Color labelColor = themeData.brightness == Brightness.light ? Colors.black : Colors.white;
+    Color labelColor =
+        themeData.brightness == Brightness.light ? Colors.black : Colors.white;
 
     return GestureDetector(
       onTap: () async {
@@ -80,7 +82,8 @@ class _ProgressButtonState extends State<ProgressButton> {
           color: widget.containerColor.withOpacity(widget.containerOpacity),
           borderRadius: BorderRadius.circular(widget.containerRadius),
           border: Border.all(
-            color: widget.borderColor?.withOpacity(widget.borderOpacity) ?? Colors.transparent,
+            color: widget.borderColor?.withOpacity(widget.borderOpacity) ??
+                Colors.transparent,
             width: widget.borderSize,
           ),
         ),
@@ -97,19 +100,17 @@ class _ProgressButtonState extends State<ProgressButton> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 ),
-              if (_loading)
-                const SizedBox(width: 10),
-              if (!_loading)
-                widget.icon ?? Container(),
-              if (!_loading)
-                const SizedBox(width: 10),
+              if (_loading) const SizedBox(width: 10),
+              if (!_loading) widget.icon ?? Container(),
+              if (!_loading) const SizedBox(width: 10),
               Flexible(
                 child: Text(
                   _loading ? widget.labelProgress ?? '' : widget.labelButton,
                   textAlign: widget.textAlign,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: widget.labelButtonStyle ?? StyleApp.largeTextStyle.copyWith(color: labelColor),
+                  style: widget.labelButtonStyle ??
+                      StyleApp.largeTextStyle.copyWith(color: labelColor),
                 ),
               ),
             ],
@@ -164,13 +165,15 @@ class AnimateProgressButton extends StatefulWidget {
     this.textAlign = TextAlign.center,
     this.labelButtonStyle,
     required this.onTap,
+    this.icon,
   });
 
   @override
   _AnimateProgressButtonState createState() => _AnimateProgressButtonState();
 }
 
-class _AnimateProgressButtonState extends State<AnimateProgressButton> with SingleTickerProviderStateMixin {
+class _AnimateProgressButtonState extends State<AnimateProgressButton>
+    with SingleTickerProviderStateMixin {
   bool _loading = false;
   AnimationController? _controller;
   Animation<double>? _opacityAnimation;
@@ -185,7 +188,9 @@ class _AnimateProgressButtonState extends State<AnimateProgressButton> with Sing
     );
 
     _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller!);
-    _positionAnimation = Tween<Offset>(begin: Offset.zero, end: Offset(widget.xPosition, widget.yPosition)).animate(_controller!);
+    _positionAnimation = Tween<Offset>(
+            begin: Offset.zero, end: Offset(widget.xPosition, widget.yPosition))
+        .animate(_controller!);
   }
 
   @override
@@ -197,7 +202,8 @@ class _AnimateProgressButtonState extends State<AnimateProgressButton> with Sing
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    Color labelColor = themeData.brightness == Brightness.light ? Colors.black : Colors.white;
+    Color labelColor =
+        themeData.brightness == Brightness.light ? Colors.black : Colors.white;
 
     return GestureDetector(
       onTap: () async {
@@ -223,26 +229,31 @@ class _AnimateProgressButtonState extends State<AnimateProgressButton> with Sing
           }
         }
       },
-
       child: Container(
         margin: widget.margin,
         width: widget.width,
         height: widget.height,
         constraints: const BoxConstraints(minHeight: 30),
         decoration: BoxDecoration(
-          gradient: (widget.containerColorStart != Colors.transparent && widget.containerColorEnd != Colors.transparent)
+          gradient: (widget.containerColorStart != Colors.transparent &&
+                  widget.containerColorEnd != Colors.transparent)
               ? LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [widget.containerColorStart, widget.containerColorEnd],
-          )
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    widget.containerColorStart,
+                    widget.containerColorEnd
+                  ],
+                )
               : null,
-          color: (widget.containerColorStart == Colors.transparent || widget.containerColorEnd == Colors.transparent)
+          color: (widget.containerColorStart == Colors.transparent ||
+                  widget.containerColorEnd == Colors.transparent)
               ? widget.containerColor.withOpacity(widget.containerOpacity)
               : null,
           borderRadius: BorderRadius.circular(widget.containerRadius),
           border: Border.all(
-            color: widget.borderColor?.withOpacity(widget.borderOpacity) ?? Colors.transparent,
+            color: widget.borderColor?.withOpacity(widget.borderOpacity) ??
+                Colors.transparent,
             width: widget.borderSize,
           ),
         ),
@@ -259,8 +270,7 @@ class _AnimateProgressButtonState extends State<AnimateProgressButton> with Sing
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 ),
-              if (_loading)
-                const SizedBox(width: 10),
+              if (_loading) const SizedBox(width: 10),
               if (!_loading)
                 AnimatedBuilder(
                   animation: _controller!,
@@ -275,28 +285,31 @@ class _AnimateProgressButtonState extends State<AnimateProgressButton> with Sing
                   },
                   child: widget.icon ?? Container(),
                 ),
-              if (!_loading && widget.icon != null)
-                const SizedBox(width: 10),
-                Flexible(
-                  child: AnimatedBuilder(
-                    animation: _controller!,
-                    builder: (BuildContext context, Widget? child) {
-                      return Opacity(
-                        opacity: _opacityAnimation!.value,
-                        child: Transform.translate(
-                          offset: _positionAnimation!.value,
-                          child: Text(
-                            _loading ? widget.labelProgress ?? "" : widget.labelButton,
-                            textAlign: widget.textAlign,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: widget.labelButtonStyle ?? StyleApp.largeTextStyle.copyWith(color: labelColor),
-                          ),
+              if (!_loading && widget.icon != null) const SizedBox(width: 10),
+              Flexible(
+                child: AnimatedBuilder(
+                  animation: _controller!,
+                  builder: (BuildContext context, Widget? child) {
+                    return Opacity(
+                      opacity: _opacityAnimation!.value,
+                      child: Transform.translate(
+                        offset: _positionAnimation!.value,
+                        child: Text(
+                          _loading
+                              ? widget.labelProgress ?? ""
+                              : widget.labelButton,
+                          textAlign: widget.textAlign,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: widget.labelButtonStyle ??
+                              StyleApp.largeTextStyle
+                                  .copyWith(color: labelColor),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
+              ),
             ],
           ),
         ),
@@ -354,7 +367,8 @@ class AnimateMenuButton extends StatefulWidget {
   _AnimateMenuButtonState createState() => _AnimateMenuButtonState();
 }
 
-class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTickerProviderStateMixin {
+class _AnimateMenuButtonState extends State<AnimateMenuButton>
+    with SingleTickerProviderStateMixin {
   bool _loading = false;
   AnimationController? _controller;
   Animation<double>? _opacityAnimation;
@@ -369,7 +383,9 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
     );
 
     _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller!);
-    _positionAnimation = Tween<Offset>(begin: Offset.zero, end: Offset(widget.xPosition, widget.yPosition)).animate(_controller!);
+    _positionAnimation = Tween<Offset>(
+            begin: Offset.zero, end: Offset(widget.xPosition, widget.yPosition))
+        .animate(_controller!);
   }
 
   @override
@@ -381,7 +397,8 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    Color labelColor = themeData.brightness == Brightness.light ? Colors.black : Colors.white;
+    Color labelColor =
+        themeData.brightness == Brightness.light ? Colors.black : Colors.white;
 
     return GestureDetector(
       onTap: () async {
@@ -407,7 +424,6 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
           }
         }
       },
-
       child: Container(
         margin: widget.margin,
         width: widget.width,
@@ -421,7 +437,8 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
           ),
           borderRadius: BorderRadius.circular(widget.containerRadius),
           border: Border.all(
-            color: widget.borderColor?.withOpacity(widget.borderOpacity) ?? Colors.transparent,
+            color: widget.borderColor?.withOpacity(widget.borderOpacity) ??
+                Colors.transparent,
             width: widget.borderSize,
           ),
         ),
@@ -438,8 +455,7 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 ),
-              if (_loading)
-                const SizedBox(height: 10),
+              if (_loading) const SizedBox(height: 10),
               if (!_loading)
                 AnimatedBuilder(
                   animation: _controller!,
@@ -454,8 +470,7 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
                   },
                   child: widget.icon ?? Container(),
                 ),
-              if (!_loading && widget.icon != null)
-                const SizedBox(height: 10),
+              if (!_loading && widget.icon != null) const SizedBox(height: 10),
               Flexible(
                 child: AnimatedBuilder(
                   animation: _controller!,
@@ -465,11 +480,15 @@ class _AnimateMenuButtonState  extends State<AnimateMenuButton> with SingleTicke
                       child: Transform.translate(
                         offset: _positionAnimation!.value,
                         child: Text(
-                          _loading ? widget.labelProgress ?? "" : widget.labelButton,
+                          _loading
+                              ? widget.labelProgress ?? ""
+                              : widget.labelButton,
                           textAlign: widget.textAlign,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: widget.labelButtonStyle ?? StyleApp.mediumTextStyle.copyWith(color: labelColor),
+                          style: widget.labelButtonStyle ??
+                              StyleApp.mediumTextStyle
+                                  .copyWith(color: labelColor),
                         ),
                       ),
                     );

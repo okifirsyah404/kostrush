@@ -1,14 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:kostrushapp/BuatSandi.dart';
 import 'package:kostrushapp/EditProfil.dart';
-import 'package:kostrushapp/KodeOTP.dart';
-import 'package:kostrushapp/Login.dart';
-import 'package:kostrushapp/Pemesanan.dart';
-import 'package:kostrushapp/Register.dart';
-import 'package:kostrushapp/SandiBaru.dart';
 
 import 'Layout/Style/StyleApp.dart';
 import 'Layout/Widget/ButtonStyles.dart';
@@ -16,7 +10,6 @@ import 'Layout/Widget/PasswordFormFieldStyles.dart';
 import 'Layout/Widget/TextFormFieldStyles.dart';
 import 'Layout/Widget/TextStyles.dart';
 import 'LupaSandi.dart';
-import 'VerifikasiBerhasil.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-          () {
+      () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Login()),
@@ -58,9 +51,13 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Image.asset("assets/images/logo.png"),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               "KostRush",
               style: TextStyle(fontSize: 24),
@@ -78,7 +75,6 @@ class Login extends StatefulWidget {
 
   @override
   State<Login> createState() => _LoginState();
-
 }
 
 class _LoginState extends State<Login> {
@@ -95,26 +91,30 @@ class _LoginState extends State<Login> {
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Align(
                   alignment: Alignment.center,
-                  child: Text(
-                      "Selamat Datang di\nKostRush Nganjuk",
-                      style: StyleApp.largeTextStyle.copyWith(
-                          fontWeight: FontWeight.bold)
-                  ),
+                  child: Text("Selamat Datang di\nKostRush Nganjuk",
+                      style: StyleApp.largeTextStyle
+                          .copyWith(fontWeight: FontWeight.bold)),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Image.asset("assets/images/logo.png"),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Align(
                   alignment: Alignment.center,
-                  child: Text(
-                      "KostRush",
-                      style: StyleApp.largeTextStyle.copyWith()
-                  ),
+                  child: Text("KostRush",
+                      style: StyleApp.largeTextStyle.copyWith()),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Align(
                     alignment: Alignment.center,
                     child: AnimateTextField(
@@ -125,9 +125,10 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(6),
                       borderAnimationColor: Colors.purple.shade800,
                       borderAnimationRadius: 6,
-                    )
+                    )),
+                const SizedBox(
+                  height: 10,
                 ),
-                const SizedBox(height: 10,),
                 Align(
                     alignment: Alignment.center,
                     child: AnimatePasswordField(
@@ -139,9 +140,10 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(6),
                       borderAnimationColor: Colors.purple.shade800,
                       borderAnimationRadius: 6,
-                    )
+                    )),
+                const SizedBox(
+                  height: 10,
                 ),
-                const SizedBox(height: 10,),
                 Align(
                   alignment: Alignment.topRight,
                   child: GestureDetector(
@@ -149,20 +151,20 @@ class _LoginState extends State<Login> {
                       print("ditekan");
                       Get.off(LupaSandi());
                     },
-                    child: Text(
-                        "Lupa Kata Sandi",
-                        style: StyleApp.mediumTextStyle.copyWith()
-                    ),
+                    child: Text("Lupa Kata Sandi",
+                        style: StyleApp.mediumTextStyle.copyWith()),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: AnimateProgressButton(
                     labelButton: "Masuk",
                     labelProgress: "Memproses",
-                    labelButtonStyle: StyleApp.largeTextStyle.copyWith(
-                        color: Colors.white),
+                    labelButtonStyle:
+                        StyleApp.largeTextStyle.copyWith(color: Colors.white),
                     height: 50,
                     containerColor: Colors.purple.shade800,
                     containerRadius: 6,
@@ -171,29 +173,30 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                        "Belum Punya Akun?",
-                        style: StyleApp.largeTextStyle.copyWith()
+                    Text("Belum Punya Akun?",
+                        style: StyleApp.largeTextStyle.copyWith()),
+                    const SizedBox(
+                      width: 10,
                     ),
-                    const SizedBox(width: 10,),
                     GestureDetector(
                       onTap: () {
                         Get.off(EditProfil());
                       },
-                      child: Text(
-                          "Daftar",
-                          style: StyleApp.largeTextStyle.copyWith(
-                              color: Colors.blue
-                          )
-                      ),
+                      child: Text("Daftar",
+                          style: StyleApp.largeTextStyle
+                              .copyWith(color: Colors.blue)),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: Column(
@@ -209,7 +212,7 @@ class _LoginState extends State<Login> {
                           // Tambahkan logika untuk masuk menggunakan akun Google di sini
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -222,7 +225,9 @@ class _LoginState extends State<Login> {
                             SizedBox(width: 8),
                             Text(
                               'Masuk dengan Google',
-                              style: TextStyle(color: Colors.black),  // Set text color to black
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
                             ),
                           ],
                         ),
