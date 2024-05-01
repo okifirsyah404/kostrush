@@ -22,7 +22,13 @@ abstract class ImageAssetConstant {
   static const String locTanjungAnom = 'assets/images/tanjung_anom.png';
   static const String locWilangan = 'assets/images/wilangan.png';
 
+  static const String dormPlaceholder = "assets/images/kost1.jpg";
+  static const String dormPlaceholder2 = "assets/images/kost2.jpg";
+  static const String dormPlaceholder3 = "assets/images/kost3.jpg";
+  static const String dormPlaceholder4 = "assets/images/kost4.jpg";
+
   static const String success = 'assets/images/berhasil.png';
   static const String successAlt = 'assets/images/berhasil2.png';
-  static const String profilePlaceholder = 'assets/images/user3.jpg';
+  static const String profilePlaceholder =
+      'assets/images/profile_placeholder.png';
 }

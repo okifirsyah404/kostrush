@@ -17,4 +17,17 @@ abstract class _AppPath {
   static const dashboard = '/dashboard';
   static const transaction = '/transaction';
   static const profile = '/profile';
+  static const edit = '/edit';
+  static const detail = '/detail';
+  static const policy = '/policy';
+  static const aboutUs = '/about-us';
+  static const helpCenter = '/help-center';
+  static const location = '/location';
+  static const result = '/result';
+  static const dormitory = '/dormitory';
+  static const form = '/form';
+  static const order = '/order';
+  static const select = '/select';
+  static const duration = '/duration';
+  static const seleccted = '/selected';
 }

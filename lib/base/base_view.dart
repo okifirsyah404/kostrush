@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kostrushapp/app/themes/color_theme.dart';
+import 'package:kostrushapp/presentation/themes/color_theme.dart';
 
-import '../app/components/container/progress_container.dart';
+import '../presentation/components/container/progress_container.dart';
 import 'base_controller.dart';
 
 /// BaseView adalah class yang digunakan untuk membuat view
@@ -49,6 +49,10 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
   /// Method ini digunakan untuk mengatur on try again
   VoidCallback? onTryAgain() {
     return null;
+  }
+
+  Future<void> onRefresh() async {
+    controller.onRefresh();
   }
 
   /// Method ini digunakan untuk membuat page content dengan konsep enkapsulasi

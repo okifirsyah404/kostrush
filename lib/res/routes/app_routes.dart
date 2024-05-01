@@ -9,7 +9,7 @@ abstract class AppRoutes {
   static const signUp = _AppPath.signUp;
   static const signUpAccount = _AppPath.signUp + _AppPath.account;
   static const otp = _AppPath.otp;
-  static const otpSuccess = _AppPath.otp + _AppPath.success;
+  static const success = _AppPath.success;
   static const main = _AppPath.main;
   static const dashboard = _AppPath.main + _AppPath.dashboard;
   static const transaction = _AppPath.main + _AppPath.transaction;
@@ -17,4 +17,15 @@ abstract class AppRoutes {
   static const forgetPassword = _AppPath.forgetPassword;
   static const resetPassword = _AppPath.resetPassword;
   static const changePassword = _AppPath.changePassword;
+  static const editProfile = _AppPath.profile + _AppPath.edit;
+  static const detailProfile = _AppPath.profile + _AppPath.detail;
+  static const transactionDetail = _AppPath.transaction + _AppPath.detail;
+  static const policy = _AppPath.policy;
+  static const aboutUs = _AppPath.aboutUs;
+  static const helpCenter = _AppPath.helpCenter;
+  static const locationResult = _AppPath.location + _AppPath.result;
+  static const detailDormitory = _AppPath.dormitory + _AppPath.detail;
+  static const orderForm = _AppPath.form + _AppPath.order;
+  static const selectDuration = _AppPath.select + _AppPath.duration;
+  static const selectedResult = _AppPath.seleccted + _AppPath.result;
 }

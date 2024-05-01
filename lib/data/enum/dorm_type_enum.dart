@@ -1,6 +1,6 @@
 enum DormTypeEnum {
-  REGULAR,
-  SUITE,
-  PREMIUM,
-  VIP,
+  regular,
+  suite,
+  premium,
+  vip,
 }
