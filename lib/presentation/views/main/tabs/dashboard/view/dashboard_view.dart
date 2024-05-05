@@ -38,6 +38,9 @@ class DashboardView extends BaseView<DashboardController> {
                   Icons.search,
                   color: ColorsTheme.primaryColor,
                 ),
+                onContainerTap: () {
+                  controller.navigateToSearch();
+                },
               ),
             ),
           ),
@@ -68,7 +71,7 @@ class DashboardView extends BaseView<DashboardController> {
           gap(8),
           ExpandChild(
             collapsedVisibilityFactor: 0.25,
-            indicatorBuilder: (context, onExpand(), isExpand) {
+            indicatorBuilder: (context, Function() onExpand, isExpand) {
               return InkWell(
                 onTap: onExpand,
                 splashFactory: NoSplash.splashFactory,

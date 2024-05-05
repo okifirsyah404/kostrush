@@ -35,7 +35,7 @@ class ForgetPasswordController extends BaseController<NoArguments, NoState> {
     Get.toNamed(
       AppRoutes.otp,
       arguments: OtpArgument(
-        context: OtpPusrposeEnum.forgotPassword,
+        context: OtpPurposeEnum.forgotPassword,
         email: emailController.text,
       ),
     );

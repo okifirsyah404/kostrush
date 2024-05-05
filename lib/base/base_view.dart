@@ -5,8 +5,9 @@ import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import '../presentation/components/container/progress_container.dart';
 import 'base_controller.dart';
 
-/// BaseView adalah class yang digunakan untuk membuat view
-/// yang memiliki konsep state management dengan menggunakan GetX
+/// BaseView adalah class yang digunakan untuk membuat view yang memiliki konsep state management dengan menggunakan GetX.
+/// Class ini memiliki beberapa method yang digunakan untuk membuat view dengan konsep enkapsulasi.
+/// Class ini membutuhkan controller yang diimplementasikan dari BaseController.
 abstract class BaseView<T extends BaseController> extends GetView<T> {
   const BaseView({super.key});
 
@@ -51,6 +52,7 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
     return null;
   }
 
+  /// Method ini digunakan untuk melakukan refresh pada view
   Future<void> onRefresh() async {
     controller.onRefresh();
   }

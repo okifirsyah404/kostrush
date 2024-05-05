@@ -7,7 +7,7 @@ import 'package:kostrushapp/di/use_case_module.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-/// Class ini digunakan untuk inisialisasi modul aplikasi dengan konsep dependency injection
+/// Fungsi ini digunakan untuk inisialisasi modul aplikasi dengan konsep dependency injection
 Future<void> initApplicationModule() async {
   await Get.putAsync<Logger>(
     () async => Logger(),

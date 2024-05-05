@@ -4,7 +4,7 @@ import '../../../../data/enum/otp_purpose_enum.dart';
 
 class ResetPasswordArgument extends BaseArguments {
   final String email;
-  final OtpPusrposeEnum context;
+  final OtpPurposeEnum context;
 
   ResetPasswordArgument({required this.email, required this.context});
 }

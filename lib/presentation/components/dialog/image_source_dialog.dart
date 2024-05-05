@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+/// Class ini berfungsi sebagai dialog untuk memilih sumber gambar.
+/// Dibutuhkan parameter [cameraAction] untuk menentukan aksi ketika memilih kamera.
+/// Dibutuhkan parameter [galleryAction] untuk menentukan aksi ketika memilih galeri.
+/// CLass ini mengextends GetView.
 class ImageSourceDialog extends GetView {
   const ImageSourceDialog({
     super.key,

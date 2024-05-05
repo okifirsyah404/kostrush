@@ -3,7 +3,11 @@ import 'package:kostrushapp/utils/extensions/base_controller_ext.dart';
 
 import 'base_argument.dart';
 
-/// Kelas ini digunakan sebagai base class untuk controller yang digunakan untuk mengatur state management pada view
+/// Kelas ini digunakan sebagai base class untuk controller yang digunakan untuk mengatur state management pada view.
+/// Kelas ini menggunakan GetX untuk melakukan state management.
+/// Kelas ini memiliki beberapa method yang digunakan untuk mengatur proses pada controller.
+/// Kelas ini membutuhkan argument yang diimplementasikan dari BaseArguments.
+/// StateMixin digunakan untuk mengatur state pada controller.
 abstract class BaseController<T extends BaseArguments, M> extends GetxController
     with StateMixin<M> {
   dynamic _arguments = Get.arguments;

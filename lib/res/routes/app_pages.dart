@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:kostrushapp/presentation/views/reset_password/view/reset_password_view.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
@@ -39,6 +40,8 @@ import '../../presentation/views/otp/view/otp_view.dart';
 import '../../presentation/views/policy/binding/policy_binding.dart';
 import '../../presentation/views/policy/view/policy_view.dart';
 import '../../presentation/views/reset_password/binding/reset_password_binding.dart';
+import '../../presentation/views/search/binding/search_binding.dart';
+import '../../presentation/views/search/view/search_view.dart';
 import '../../presentation/views/selected_result/binding/selected_result_binding.dart';
 import '../../presentation/views/selected_result/view/selected_result_view.dart';
 import '../../presentation/views/sign_in/binding/sign_in_binding.dart';
@@ -180,6 +183,12 @@ class AppPages {
       name: AppRoutes.selectedResult,
       page: () => const SelectedResultView(),
       binding: SelectedResultBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.search,
+      page: () => const SearchView(),
+      binding: SearchBinding(),
+      transition: Transition.downToUp,
     )
   ];
 }

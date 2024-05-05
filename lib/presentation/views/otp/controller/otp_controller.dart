@@ -35,7 +35,7 @@ class OtpController extends BaseController<OtpArgument, NoState> {
 
   void sendOtp() {
     switch (arguments.context) {
-      case OtpPusrposeEnum.signUp:
+      case OtpPurposeEnum.signUp:
         Get.toNamed(
           AppRoutes.success,
           arguments: SuccessArgument(
@@ -47,7 +47,7 @@ class OtpController extends BaseController<OtpArgument, NoState> {
         );
         break;
 
-      case OtpPusrposeEnum.forgotPassword:
+      case OtpPurposeEnum.forgotPassword:
         Get.toNamed(
           AppRoutes.resetPassword,
           arguments: ResetPasswordArgument(
@@ -56,7 +56,7 @@ class OtpController extends BaseController<OtpArgument, NoState> {
           ),
         );
 
-      case OtpPusrposeEnum.changePassword:
+      case OtpPurposeEnum.changePassword:
         Get.toNamed(
           AppRoutes.changePassword,
           arguments: ChangePasswordArgument(

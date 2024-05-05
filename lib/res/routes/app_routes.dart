@@ -27,5 +27,6 @@ abstract class AppRoutes {
   static const detailDormitory = _AppPath.dormitory + _AppPath.detail;
   static const orderForm = _AppPath.form + _AppPath.order;
   static const selectDuration = _AppPath.select + _AppPath.duration;
-  static const selectedResult = _AppPath.seleccted + _AppPath.result;
+  static const selectedResult = _AppPath.selected + _AppPath.result;
+  static const search = _AppPath.search;
 }

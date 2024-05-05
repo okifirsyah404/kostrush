@@ -57,7 +57,7 @@ class EditProfileView extends BaseView<EditProfileController> {
         gap(8),
         MainButton.icon(
           label: "Ubah Foto",
-          icon: Icon(Icons.camera_alt_outlined),
+          icon: const Icon(Icons.camera_alt_outlined),
           buttonType: ButtonType.outlined,
           onTap: () {
             controller.openCameraOrGalleryDialog();

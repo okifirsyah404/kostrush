@@ -42,7 +42,7 @@ class AccountSignUpController
     Get.toNamed(
       AppRoutes.otp,
       arguments: OtpArgument(
-        context: OtpPusrposeEnum.signUp,
+        context: OtpPurposeEnum.signUp,
         email: emailController.text,
       ),
     );

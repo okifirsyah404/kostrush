@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 class ApplicationUseCase with PermissionServices {
   final _logger = Get.find<Logger>();
 
+  /// Fungsi ini buat menghandle permission camera dan gallery
   Future<bool> handleCameraGalleryPermission() async {
     var permissions = await requestCameraGalleryPermission();
 

@@ -1,5 +1,5 @@
 /// Enum for OTP purpose
-enum OtpPusrposeEnum {
+enum OtpPurposeEnum {
   signUp,
   signIn,
   forgotPassword,

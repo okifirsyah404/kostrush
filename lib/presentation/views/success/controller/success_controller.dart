@@ -31,7 +31,7 @@ class SuccessController extends BaseController<SuccessArgument, NoState> {
 
   String _successAsset() {
     switch (arguments.context) {
-      case OtpPusrposeEnum.changePassword:
+      case OtpPurposeEnum.changePassword:
         return ImageAssetConstant.successAlt;
       default:
         return ImageAssetConstant.success;
@@ -46,20 +46,20 @@ class SuccessController extends BaseController<SuccessArgument, NoState> {
     );
 
     switch (arguments.context) {
-      case OtpPusrposeEnum.signUp:
+      case OtpPurposeEnum.signUp:
         Get.back();
         Get.back();
         Get.back();
         Get.back();
         break;
-      case OtpPusrposeEnum.forgotPassword:
+      case OtpPurposeEnum.forgotPassword:
         Get.back();
         Get.back();
         Get.back();
         Get.back();
         break;
 
-      case OtpPusrposeEnum.changePassword:
+      case OtpPurposeEnum.changePassword:
         Get.back();
         Get.back();
         Get.back();

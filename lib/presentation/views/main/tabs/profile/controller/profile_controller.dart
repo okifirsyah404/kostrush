@@ -40,7 +40,7 @@ class ProfileController extends BaseController<NoArguments, NoState> {
     Get.toNamed(
       AppRoutes.otp,
       arguments: OtpArgument(
-        context: OtpPusrposeEnum.changePassword,
+        context: OtpPurposeEnum.changePassword,
         email: "test@email.com",
       ),
     );

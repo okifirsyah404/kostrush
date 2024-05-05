@@ -118,6 +118,10 @@ class DashboardController extends BaseController<NoArguments, NoState> {
     );
   }
 
+  void navigateToSearch() {
+    Get.toNamed(AppRoutes.search);
+  }
+
   void navigateToDetailDormitory() {
     Get.toNamed(AppRoutes.detailDormitory);
   }

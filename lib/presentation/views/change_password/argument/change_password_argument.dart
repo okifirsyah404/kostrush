@@ -3,10 +3,10 @@ import 'package:kostrushapp/data/enum/otp_purpose_enum.dart';
 
 class ChangePasswordArgument extends BaseArguments {
   final String email;
-  final OtpPusrposeEnum context;
+  final OtpPurposeEnum context;
 
   ChangePasswordArgument({
     required this.email,
-    this.context = OtpPusrposeEnum.changePassword,
+    this.context = OtpPurposeEnum.changePassword,
   });
 }

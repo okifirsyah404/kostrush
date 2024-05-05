@@ -19,7 +19,7 @@ class EditProfileController extends BaseController<NoArguments, NoState>
   late TextEditingController emailController;
 
   RxBool isFileChange = false.obs;
-  Rxn<File> imageFile = Rxn<File>();
+  Rxn<File> imageFile = Rxn<File>(null);
 
   @override
   void initComponent() {

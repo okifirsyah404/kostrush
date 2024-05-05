@@ -39,6 +39,7 @@ class MainTextInput extends StatelessWidget {
     this.obscureText,
     this.enabled,
     this.onTap,
+    this.filled,
     this.onContainerTap,
     this.counterText,
     this.counterStyle,
@@ -68,6 +69,7 @@ class MainTextInput extends StatelessWidget {
   final Function()? onTapPrefix, onTapSuffix;
   final bool? obscureText;
   final bool? enabled;
+  final bool? filled;
   final VoidCallback? onTap;
   final VoidCallback? onContainerTap;
   final String? counterText;
@@ -218,6 +220,7 @@ class MainTextInput extends StatelessWidget {
           ),
           hintText: hintText,
           fillColor: backgroundColor ?? ColorsTheme.neutralColor[1000],
+          filled: filled,
           hintStyle: TypographyTheme.bodyMedium.copyWith(
             color: ColorsTheme.neutralColor[800],
           ),

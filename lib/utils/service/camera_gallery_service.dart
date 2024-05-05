@@ -15,6 +15,7 @@ mixin CameraGalleryService {
   final _imagePicker = ImagePicker();
   final _permissionService = Get.find<ApplicationUseCase>();
 
+  /// Fungsi ini buat request permission camera dan gallery
   Future<bool> requestCameraGalleryPermissions() async {
     var cameraGalleryPermission =
         await _permissionService.handleCameraGalleryPermission();
@@ -41,6 +42,10 @@ mixin CameraGalleryService {
     return cameraGalleryPermission;
   }
 
+  /// Fungsi ini buat membuka kamera
+  /// Dibutuhkan parameter [isPermissionGranted] untuk mengecek apakah permission sudah diberikan
+  /// Dibutuhkan parameter [onImagePicked] untuk mengembalikan file yang dipilih
+  /// Dibutuhkan parameter [onError] untuk mengembalikan error jika terjadi
   Future<void> openCamera({
     required bool isPermissionGranted,
     required Function(File) onImagePicked,
@@ -55,7 +60,7 @@ mixin CameraGalleryService {
           imageFile = File(imagePicked.path);
 
           CroppedFile? croppedFile = await ImageCropper().cropImage(
-            sourcePath: imageFile.path ?? "",
+            sourcePath: imageFile.path,
             aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
             aspectRatioPresets: [
               CropAspectRatioPreset.square,
@@ -92,6 +97,10 @@ mixin CameraGalleryService {
     }
   }
 
+  /// Fungsi ini buat membuka gallery
+  /// Dibutuhkan parameter [isPermissionGranted] untuk mengecek apakah permission sudah diberikan
+  /// Dibutuhkan parameter [onImagePicked] untuk mengembalikan file yang dipilih
+  /// Dibutuhkan parameter [onError] untuk mengembalikan error jika terjadi
   Future<void> openGallery({
     required bool isPermissionGranted,
     required Function(File) onImagePicked,

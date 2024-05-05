@@ -29,5 +29,6 @@ abstract class _AppPath {
   static const order = '/order';
   static const select = '/select';
   static const duration = '/duration';
-  static const seleccted = '/selected';
+  static const selected = '/selected';
+  static const search = '/search';
 }
