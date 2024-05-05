@@ -4,7 +4,6 @@ import 'package:kostrushapp/data/enum/transaction_status_enum.dart';
 import 'package:kostrushapp/presentation/components/chip/tag_chip.dart';
 import 'package:kostrushapp/res/assets/image_asset_constant.dart';
 import 'package:kostrushapp/utils/extensions/enum_ext.dart';
-import 'package:kostrushapp/utils/extensions/int_ext.dart';
 
 import '../../themes/color_theme.dart';
 import '../../themes/typography_theme.dart';
@@ -68,18 +67,7 @@ class TransactionCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gap(8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _tagBuilder(),
-                        Text(
-                          1000000.toRupiah(),
-                          style: TypographyTheme.labelMedium.copyWith(
-                            color: ColorsTheme.primaryColor,
-                          ),
-                        )
-                      ],
-                    ),
+                    _tagBuilder(),
                   ],
                 ),
               ),
