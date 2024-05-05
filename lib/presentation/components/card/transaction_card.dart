@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:kostrushapp/data/enum/transaction_status_enum.dart';
@@ -16,10 +17,11 @@ class TransactionCard extends StatelessWidget {
     required this.address,
     required this.price,
     required this.status,
+    required this.imageUrl,
     this.onTap,
   });
 
-  final String name, address;
+  final String name, address, imageUrl;
   final Function()? onTap;
   final int price;
   final TransactionStatusEnum status;
@@ -44,8 +46,8 @@ class TransactionCard extends StatelessWidget {
               SizedBox(
                 width: 80,
                 height: 80,
-                child: Image.asset(
-                  ImageAssetConstant.dormPlaceholder,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -55,14 +57,14 @@ class TransactionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Kosan Alif Berwarna Merah Yang Terang Hahahaya",
+                      name,
                       style: TypographyTheme.labelMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gap(4),
                     Text(
-                      "Jl. Raya Ciputat Parung No. 1, Ciputat, Tangerang Selatan",
+                      address,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

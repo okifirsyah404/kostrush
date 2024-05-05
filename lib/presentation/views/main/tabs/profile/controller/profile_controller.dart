@@ -2,12 +2,18 @@ import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/base/base_state.dart';
 import 'package:kostrushapp/data/enum/otp_purpose_enum.dart';
+import 'package:kostrushapp/data/network/response/user_profile_response.dart';
 import 'package:kostrushapp/presentation/views/otp/argument/otp_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../../../base/base_controller.dart';
+import '../../../../../../domain/repository/main_repository.dart';
+import '../../../../../components/dialog/main_dialog.dart';
 
-class ProfileController extends BaseController<NoArguments, NoState> {
+class ProfileController
+    extends BaseController<NoArguments, UserProfileResponse> {
+  final _repository = Get.find<MainRepository>();
+
   @override
   void initComponent() {
     // TODO: implement initComponent
@@ -20,7 +26,23 @@ class ProfileController extends BaseController<NoArguments, NoState> {
 
   @override
   Future<void> onProcess() async {
-    // TODO: implement onProcess
+    emitLoading();
+
+    final data = await _repository.fetchProfile();
+
+    data.fold(
+      (exception) {
+        emitError(exception.message);
+        Get.dialog(
+          MainDialog.error(
+            message: exception.message ?? 'Error',
+          ),
+        );
+      },
+      (data) {
+        emitSuccess(data);
+      },
+    );
   }
 
   @override

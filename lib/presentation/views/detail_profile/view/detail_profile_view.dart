@@ -35,7 +35,7 @@ class DetailProfileView extends BaseView<DetailProfileController> {
       mainAxisSize: MainAxisSize.min,
       children: [
         CircleImage.network(
-          imageEndpoint: "",
+          url: "",
           radius: 50,
         ),
         gap(16),

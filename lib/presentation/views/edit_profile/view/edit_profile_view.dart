@@ -50,7 +50,7 @@ class EditProfileView extends BaseView<EditProfileController> {
                   radius: 50,
                 )
               : CircleImage.network(
-                  imageEndpoint: "",
+                  url: "",
                   radius: 50,
                 ),
         ),

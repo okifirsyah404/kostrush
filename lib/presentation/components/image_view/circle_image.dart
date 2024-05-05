@@ -11,30 +11,28 @@ import '../../themes/color_theme.dart';
 class CircleImage extends StatelessWidget {
   const CircleImage({
     super.key,
-    required this.imageEndpoint,
+    required this.url,
     this.radius = 24.0,
     this.borderWidth,
     required this.child,
   });
 
-  final String imageEndpoint;
+  final String url;
   final double radius;
   final double? borderWidth;
   final Widget child;
 
   factory CircleImage.network({
-    required String imageEndpoint,
+    required String url,
     double radius = 24.0,
     double? borderWidth,
   }) {
     return CircleImage(
-      imageEndpoint: imageEndpoint,
+      url: url,
       radius: radius,
       borderWidth: borderWidth,
       child: CachedNetworkImage(
-        imageUrl:
-            // "${RemoteConstant.baseUrl}$imageEndpoint?time=${DateTime.now().millisecondsSinceEpoch}",
-            "https://picsum.photos/200",
+        imageUrl: url,
         fit: BoxFit.cover,
         imageBuilder: (context, imageProvider) {
           return Container(
@@ -52,7 +50,7 @@ class CircleImage extends StatelessWidget {
         errorWidget: (BuildContext context, String url, Object error) {
           final Logger log = Get.find<Logger>();
 
-          log.e("Error image profile: $imageEndpoint");
+          log.e("Error image profile: $url");
           log.e("Error image profile: $error");
 
           return Container(
@@ -81,7 +79,7 @@ class CircleImage extends StatelessWidget {
     double? borderWidth,
   }) {
     return CircleImage(
-      imageEndpoint: imageAsset,
+      url: imageAsset,
       radius: radius,
       borderWidth: borderWidth,
       child: ClipRRect(
@@ -104,7 +102,7 @@ class CircleImage extends StatelessWidget {
     double? borderWidth,
   }) {
     return CircleImage(
-      imageEndpoint: imageFile,
+      url: imageFile,
       radius: radius,
       borderWidth: borderWidth,
       child: ClipRRect(

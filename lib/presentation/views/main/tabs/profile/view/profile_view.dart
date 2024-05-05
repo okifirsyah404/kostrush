@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kostrushapp/presentation/components/button/main_button.dart';
 import 'package:kostrushapp/presentation/components/image_view/circle_image.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
+import 'package:kostrushapp/res/remote/remote_constant.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../../../base/base_view.dart';
@@ -54,16 +55,19 @@ class ProfileView extends BaseView<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleImage.network(imageEndpoint: "", radius: 50),
+            CircleImage.network(
+                url:
+                    "${RemoteConstant.baseUrl}${controller.state?.profile.imageAvatar}",
+                radius: 50),
             gap(8),
             Text(
-              "Zhada Mei Arsita",
+              controller.state?.profile.name ?? "",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TypographyTheme.labelLarge,
             ),
             gap(8),
-            Text("Mahasiswa"),
+            Text(controller.state?.profile.occupation ?? ""),
           ],
         ),
       ),

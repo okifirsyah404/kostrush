@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../base/base_view.dart';
 import '../../../../data/enum/dorm_gender_enum.dart';
+import '../../../../res/remote/remote_constant.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../../../components/card/dorm_card.dart';
 import '../controller/location_result_controller.dart';
@@ -19,6 +22,8 @@ class LocationResultView extends BaseView<LocationResultController> {
 
   @override
   Widget body(BuildContext context, state) {
+    final random = Random();
+
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: GridView.builder(
@@ -29,16 +34,20 @@ class LocationResultView extends BaseView<LocationResultController> {
           crossAxisSpacing: 16,
           mainAxisExtent: 240,
         ),
-        itemCount: 10,
+        itemCount: controller.state?.length ?? 0,
         itemBuilder: (context, index) {
-          return Center(
-            child: DormCard(
-              dormGenderEnum: DormGenderEnum.MALE,
-              price: (index + 1) * 100000,
-              name: "Kost Pak Agung ${index + 1}",
-              address: "Jl. Raya Nganjuk No. ${index + 1}",
-              maxImageWidth: Get.width,
-            ),
+          return DormCard(
+            maxImageWidth: Get.width,
+            dormGenderEnum: controller.state?[index].dormitoryGender ??
+                DormGenderEnum.UNISEX,
+            price: controller.state?[index].dormitoryPrice.price ?? 0,
+            imageUrl:
+                "${RemoteConstant.baseUrl}${controller.state?[index].dormitoryImage[random.nextInt(3)].url}",
+            name: controller.state?[index].name ?? "",
+            address: controller.state?[index].dormitoryLocation.address ?? "",
+            onTap: () {
+              controller.navigateToDetail(controller.state?[index].id ?? "");
+            },
           );
         },
       ),

@@ -1,16 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
-import 'package:kostrushapp/base/base_state.dart';
+import 'package:kostrushapp/domain/repository/main_repository.dart';
 import 'package:kostrushapp/presentation/components/focus_node/no_focus_node.dart';
 import 'package:kostrushapp/presentation/views/selected_result/argument/selected_result_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../../../base/base_controller.dart';
+import '../../../../../../data/network/response/dashboard_response.dart';
 import '../../../../../../res/assets/image_asset_constant.dart';
+import '../../../../../components/dialog/main_dialog.dart';
 import '../../../../location_result/argument/location_result_argument.dart';
 
-class DashboardController extends BaseController<NoArguments, NoState> {
+class DashboardController
+    extends BaseController<NoArguments, DashboardResponse> {
+  final _repository = Get.find<MainRepository>();
+
   late TextEditingController searchController;
 
   late NoFocusNode noFocusNode;
@@ -107,7 +112,23 @@ class DashboardController extends BaseController<NoArguments, NoState> {
 
   @override
   Future<void> onProcess() async {
-    // TODO: implement onProcess
+    emitLoading();
+
+    final data = await _repository.fetchDashboard();
+
+    data.fold(
+      (exception) {
+        emitError(exception.message);
+        Get.dialog(
+          MainDialog.error(
+            message: exception.message ?? 'Error',
+          ),
+        );
+      },
+      (data) {
+        emitSuccess(data);
+      },
+    );
   }
 
   void navigateToLocationResult(int index) {

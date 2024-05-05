@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:kostrushapp/data/enum/dorm_gender_enum.dart';
@@ -14,11 +15,12 @@ class DormCard extends StatelessWidget {
     required this.name,
     required this.address,
     required this.price,
+    required this.imageUrl,
     this.maxImageWidth = 160.0,
     this.onTap,
   }) : super(key: key);
 
-  final String name, address;
+  final String name, address, imageUrl;
   final int price;
   final DormGenderEnum dormGenderEnum;
   final double maxImageWidth;
@@ -42,8 +44,8 @@ class DormCard extends StatelessWidget {
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
-              child: Image.asset(
-                "assets/images/kost1.jpg",
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
                 fit: BoxFit.cover,
               ),
             ),

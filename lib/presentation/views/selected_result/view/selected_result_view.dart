@@ -33,6 +33,7 @@ class SelectedResultView extends BaseView<SelectedResultController> {
         itemBuilder: (context, index) {
           return Center(
             child: DormCard(
+              imageUrl: "https://picsum.photos/200/300",
               dormGenderEnum: DormGenderEnum.MALE,
               price: (index + 1) * 100000,
               name: "Kost Pak Agung ${index + 1}",
