@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/domain/repository/main_repository.dart';
 import 'package:kostrushapp/presentation/components/focus_node/no_focus_node.dart';
+import 'package:kostrushapp/presentation/views/detail_dormitory/arguments/detail_dormitory_argument.dart';
 import 'package:kostrushapp/presentation/views/selected_result/argument/selected_result_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
@@ -143,8 +144,9 @@ class DashboardController
     Get.toNamed(AppRoutes.search);
   }
 
-  void navigateToDetailDormitory() {
-    Get.toNamed(AppRoutes.detailDormitory);
+  void navigateToDetailDormitory(String id) {
+    Get.toNamed(AppRoutes.detailDormitory,
+        arguments: DetailDormitoryArgument(dormitoryId: id));
   }
 
   @override

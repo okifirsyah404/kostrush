@@ -46,7 +46,8 @@ class LocationResultView extends BaseView<LocationResultController> {
             name: controller.state?[index].name ?? "",
             address: controller.state?[index].dormitoryLocation.address ?? "",
             onTap: () {
-              controller.navigateToDetail(controller.state?[index].id ?? "");
+              controller
+                  .navigateToDetailDormitory(controller.state?[index].id ?? "");
             },
           );
         },

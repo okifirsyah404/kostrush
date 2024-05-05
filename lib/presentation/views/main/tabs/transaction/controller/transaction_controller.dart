@@ -3,6 +3,7 @@ import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/data/enum/transaction_status_enum.dart';
 import 'package:kostrushapp/data/network/response/transaction_response.dart';
 import 'package:kostrushapp/domain/repository/main_repository.dart';
+import 'package:kostrushapp/presentation/views/detail_transaction/arguments/detail_transaction_arguments.dart';
 import 'package:kostrushapp/utils/extensions/base_controller_ext.dart';
 
 import '../../../../../../base/base_controller.dart';
@@ -58,7 +59,8 @@ class TransactionController
     transactionList.close();
   }
 
-  void navigateToDetailTransaction() {
-    Get.toNamed(AppRoutes.transactionDetail);
+  void navigateToDetailTransaction(String transactionId) {
+    Get.toNamed(AppRoutes.transactionDetail,
+        arguments: DetailTransactionArguments(transactionId));
   }
 }

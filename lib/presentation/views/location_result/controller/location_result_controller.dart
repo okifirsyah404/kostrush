@@ -5,6 +5,7 @@ import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../base/base_controller.dart';
 import '../../../../domain/repository/main_repository.dart';
+import '../../detail_dormitory/arguments/detail_dormitory_argument.dart';
 
 class LocationResultController
     extends BaseController<LocationResultArgument, List<DormitoryResponse>> {
@@ -37,7 +38,8 @@ class LocationResultController
     // TODO: implement disposeComponent
   }
 
-  void navigateToDetail(String id) {
-    Get.toNamed(AppRoutes.detailDormitory);
+  void navigateToDetailDormitory(String id) {
+    Get.toNamed(AppRoutes.detailDormitory,
+        arguments: DetailDormitoryArgument(dormitoryId: id));
   }
 }

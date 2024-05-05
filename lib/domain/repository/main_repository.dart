@@ -70,4 +70,14 @@ class MainRepository {
       return left(e);
     }
   }
+
+  Future<Either<DioException, TransactionResponse>> fetchTransactionDetail(
+      String id) async {
+    try {
+      final response = await _service.fetchTransactionDetail(id);
+      return right(response.data!);
+    } on DioException catch (e) {
+      return left(e);
+    }
+  }
 }

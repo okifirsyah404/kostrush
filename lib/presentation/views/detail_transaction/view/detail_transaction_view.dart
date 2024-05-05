@@ -190,12 +190,13 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             width: Get.width,
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
-              color: ColorsTheme.primaryColor,
+              color: _statusColor(
+                  controller.state?.status ?? TransactionStatusEnum.pending),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Text(
-                "Selesai",
+                controller.state?.status.value ?? "",
                 style: TypographyTheme.labelMedium.copyWith(
                   color: ColorsTheme.neutralColor[1000],
                 ),
@@ -204,11 +205,22 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
           ),
           gap(8),
           Text(
-            TransactionStatusEnum.done.message,
+            controller.state?.status.message ?? "",
             textAlign: TextAlign.center,
           )
         ],
       ),
     );
+  }
+
+  Color? _statusColor(TransactionStatusEnum status) {
+    switch (status) {
+      case TransactionStatusEnum.pending:
+        return ColorsTheme.secondaryColor;
+      case TransactionStatusEnum.processing:
+        return ColorsTheme.primaryColor[900];
+      default:
+        return ColorsTheme.primaryColor;
+    }
   }
 }

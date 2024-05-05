@@ -42,7 +42,8 @@ class TransactionView extends BaseView<TransactionController> {
             imageUrl:
                 "${RemoteConstant.baseUrl}${controller.state?[index].dormitory.dormitoryImage[random.nextInt(3)].url}",
             onTap: () {
-              controller.navigateToDetailTransaction();
+              controller.navigateToDetailTransaction(
+                  controller.state?[index].id ?? "");
             },
           );
         },

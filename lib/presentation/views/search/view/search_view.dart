@@ -48,7 +48,11 @@ class SearchView extends BaseView<SearchViewController> {
               maxImageWidth: Get.width,
               imageUrl:
                   "${RemoteConstant.baseUrl}${controller.state?[index].dormitoryImage[random.nextInt(3)].url}",
-              onTap: () {},
+              onTap: () {
+                controller.navigateToDetailDormitory(
+                  controller.state?[index].id ?? "",
+                );
+              },
             ),
           );
         },

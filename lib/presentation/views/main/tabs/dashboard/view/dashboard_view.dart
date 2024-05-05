@@ -169,7 +169,9 @@ class DashboardView extends BaseView<DashboardController> {
                   imageUrl:
                       "${RemoteConstant.baseUrl}${controller.state?.recomendedDormitories[index].dormitoryImage[random.nextInt(3)].url}",
                   onTap: () {
-                    controller.navigateToDetailDormitory();
+                    controller.navigateToDetailDormitory(
+                        controller.state?.recomendedDormitories[index].id ??
+                            "");
                   },
                 );
               },
@@ -236,7 +238,8 @@ class DashboardView extends BaseView<DashboardController> {
                   imageUrl:
                       "${RemoteConstant.baseUrl}${controller.state?.cheapestDormitories[index].dormitoryImage[random.nextInt(3)].url}",
                   onTap: () {
-                    controller.navigateToDetailDormitory();
+                    controller.navigateToDetailDormitory(
+                        controller.state?.cheapestDormitories[index].id ?? "");
                   },
                 );
               },

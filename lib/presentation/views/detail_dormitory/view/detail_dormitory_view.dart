@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,9 @@ import 'package:kostrushapp/presentation/components/button/main_button.dart';
 import 'package:kostrushapp/presentation/components/icon_data/kost_rush_app_icons.dart';
 import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
+import 'package:kostrushapp/res/remote/remote_constant.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
+import 'package:kostrushapp/utils/extensions/enum_ext.dart';
 import 'package:kostrushapp/utils/extensions/int_ext.dart';
 import 'package:kostrushapp/utils/mixins/custom_sliver_mixin.dart';
 
@@ -77,8 +80,9 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
               return SizedBox(
                 height: 240,
                 width: double.infinity,
-                child: Image.asset(
-                  controller.imageList[index],
+                child: CachedNetworkImage(
+                  imageUrl:
+                      "${RemoteConstant.baseUrl}${controller.imageList[index]}",
                   fit: BoxFit.cover,
                 ),
               );
@@ -141,29 +145,31 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Kos Kenanga Pasar IV",
+            controller.state?.name ?? "",
             style: TypographyTheme.titleLarge,
           ),
           gap(16),
           Row(
             children: [
               TagChip.filled(
-                text: "Tipe Premium",
+                text: "Tipe ${controller.state?.dormitoryType}",
               ),
               gap(8),
               TagChip.filled(
-                text: "Putra",
+                text: controller.state?.dormitoryGender.value ?? "",
               ),
             ],
           ),
           gap(8),
           Text(
-            1000000.toRupiah() + " / Bulan",
+            "${(controller.state?.dormitoryPrice.price ?? 0).toRupiah()} / Bulan",
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              controller.intentToMap();
+            },
             splashFactory: NoSplash.splashFactory,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -177,7 +183,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
                 gap(8),
                 Expanded(
                   child: Text(
-                    "Jl. Kenanga Pasar IV No. 1, Jakarta Utara, DKI Jakarta, Indonesia, 14450, Jakarta Utara, DKI Jakarta, Indonesia",
+                    controller.state?.dormitoryLocation.address ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -187,7 +193,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
           ),
           gap(8),
           Text(
-            "2 Kamar Tersedia",
+            "${controller.state?.availableRoom ?? 0} Kamar Tersedia",
             style: TypographyTheme.labelMedium.copyWith(
               color: ColorsTheme.successColor,
             ),

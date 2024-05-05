@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:kostrushapp/base/base_response.dart';
 import 'package:kostrushapp/data/network/response/dashboard_response.dart';
-import 'package:kostrushapp/data/network/response/profile_response.dart';
 import 'package:kostrushapp/data/network/response/transaction_response.dart';
 import 'package:kostrushapp/data/network/response/user_profile_response.dart';
 import 'package:kostrushapp/res/remote/remote_constant.dart';
@@ -21,4 +20,9 @@ abstract class MainService {
 
   @GET(RemoteConstant.profile)
   Future<BaseResponse<UserProfileResponse>> fetchProfile();
+
+  @GET(RemoteConstant.transactionDetail)
+  Future<BaseResponse<TransactionResponse>> fetchTransactionDetail(
+    @Path("id") String id,
+  );
 }

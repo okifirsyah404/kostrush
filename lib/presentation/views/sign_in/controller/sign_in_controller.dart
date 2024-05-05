@@ -51,7 +51,7 @@ class SignInController extends BaseController<NoArguments, NoState> {
         (exception) {
           Get.dialog(
             MainDialog.error(
-              message: exception.message ?? 'Error',
+              message: exception.response?.message ?? 'Error',
             ),
           );
         },

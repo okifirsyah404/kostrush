@@ -7,6 +7,8 @@ import 'package:kostrushapp/data/network/response/dormitory_response.dart';
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../domain/repository/main_repository.dart';
+import '../../../../res/routes/app_routes.dart';
+import '../../detail_dormitory/arguments/detail_dormitory_argument.dart';
 
 class SearchViewController
     extends BaseController<NoArguments, List<DormitoryResponse>> {
@@ -48,6 +50,11 @@ class SearchViewController
     _timer = Timer(const Duration(milliseconds: 300), () {
       searchDormitory(value);
     });
+  }
+
+  void navigateToDetailDormitory(String id) {
+    Get.toNamed(AppRoutes.detailDormitory,
+        arguments: DetailDormitoryArgument(dormitoryId: id));
   }
 
   @override
