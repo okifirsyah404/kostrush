@@ -27,11 +27,11 @@ class MainView extends GetView<MainController> {
             ),
             BottomNavigationBarItem(
               icon: Icon(KostRushApp.basket),
-              label: "Transaction",
+              label: "Transaksi",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: "Profile",
+              label: "Profil",
             ),
           ],
         ),

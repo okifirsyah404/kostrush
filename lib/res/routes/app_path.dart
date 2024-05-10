@@ -7,11 +7,8 @@ abstract class _AppPath {
   static const splash = '/splash';
   static const signIn = '/sign-in';
   static const signUp = '/sign-up';
-  static const otp = '/otp';
   static const account = '/account';
   static const success = '/success';
-  static const forgetPassword = '/forget-password';
-  static const resetPassword = '/reset-password';
   static const changePassword = '/change-password';
   static const main = '/main';
   static const dashboard = '/dashboard';

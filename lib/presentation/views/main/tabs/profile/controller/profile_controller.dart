@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/base/base_state.dart';
 import 'package:kostrushapp/data/enum/otp_purpose_enum.dart';
-import 'package:kostrushapp/presentation/views/otp/argument/otp_argument.dart';
+import 'package:kostrushapp/presentation/views/change_password/argument/change_password_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../../../base/base_controller.dart';
@@ -38,8 +38,8 @@ class ProfileController extends BaseController<NoArguments, NoState> {
 
   void navigateToChangePassword() {
     Get.toNamed(
-      AppRoutes.otp,
-      arguments: OtpArgument(
+      AppRoutes.changePassword,
+      arguments: ChangePasswordArgument(
         context: OtpPurposeEnum.changePassword,
         email: "test@email.com",
       ),

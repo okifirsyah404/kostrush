@@ -6,7 +6,7 @@ import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../base/base_controller.dart';
 import '../../../../data/enum/otp_purpose_enum.dart';
-import '../../otp/argument/otp_argument.dart';
+import '../../success/argument/success_argument.dart';
 
 class AccountSignUpController
     extends BaseController<AccountSignUpArgument, NoState> {
@@ -40,11 +40,13 @@ class AccountSignUpController
 
   void navigateToOtp() {
     Get.toNamed(
-      AppRoutes.otp,
-      arguments: OtpArgument(
-        context: OtpPurposeEnum.signUp,
-        email: emailController.text,
-      ),
+      AppRoutes.success,
+      arguments: SuccessArgument(
+          context: OtpPurposeEnum.signUp,
+          title: "Registrasi Berhasil",
+          description:
+              "Akun anda berhasil terdaftar. Silahkan login untuk melanjutkan.",
+          buttonText: ""),
     );
   }
 }

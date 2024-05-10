@@ -8,14 +8,11 @@ abstract class AppRoutes {
   static const signIn = _AppPath.signIn;
   static const signUp = _AppPath.signUp;
   static const signUpAccount = _AppPath.signUp + _AppPath.account;
-  static const otp = _AppPath.otp;
   static const success = _AppPath.success;
   static const main = _AppPath.main;
   static const dashboard = _AppPath.main + _AppPath.dashboard;
   static const transaction = _AppPath.main + _AppPath.transaction;
   static const profile = _AppPath.main + _AppPath.profile;
-  static const forgetPassword = _AppPath.forgetPassword;
-  static const resetPassword = _AppPath.resetPassword;
   static const changePassword = _AppPath.changePassword;
   static const editProfile = _AppPath.profile + _AppPath.edit;
   static const detailProfile = _AppPath.profile + _AppPath.detail;

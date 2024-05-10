@@ -67,7 +67,7 @@ class TransactionCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gap(8),
-                    _tagBuilder(),
+                    UnconstrainedBox(child: _tagBuilder()),
                   ],
                 ),
               ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:kostrushapp/presentation/components/button/main_button.dart';
 import 'package:kostrushapp/presentation/components/icon_data/kost_rush_app_icons.dart';
 import 'package:kostrushapp/presentation/themes/color_theme.dart';
@@ -42,16 +40,27 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
                 ),
                 sliverDivider(),
                 SliverToBoxAdapter(
-                  child: _specificationBuilder(),
+                  child: _descriptionBuilder(),
                 ),
                 sliverDivider(),
                 SliverToBoxAdapter(
-                  child: _bathFacilityBuilder(),
+                  child: _facilityDescriptionBuilder(),
                 ),
                 sliverDivider(),
                 SliverToBoxAdapter(
-                  child: _rulesBuilder(),
+                  child: _rulesDescriptionBuilder(),
                 ),
+                // SliverToBoxAdapter(
+                //   child: _specificationBuilder(),
+                // ),
+                // sliverDivider(),
+                // SliverToBoxAdapter(
+                //   child: _bathFacilityBuilder(),
+                // ),
+                // sliverDivider(),
+                // SliverToBoxAdapter(
+                //   child: _rulesBuilder(),
+                // ),
               ],
             ),
           ),
@@ -65,70 +74,13 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     return SizedBox(
       height: 240,
       width: double.infinity,
-      child: Stack(
-        children: [
-          PageView.builder(
-            itemCount: controller.imageList.length,
-            controller: controller.pageController,
-            onPageChanged: (index) {
-              controller.onPageChanged(index);
-            },
-            itemBuilder: (context, index) {
-              return SizedBox(
-                height: 240,
-                width: double.infinity,
-                child: Image.asset(
-                  controller.imageList[index],
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
-          ),
-          Positioned.fill(
-            bottom: 16,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _iconButtonBuilder(
-                      onTap: () {
-                        controller.previousPage();
-                      },
-                      icon: Icon(
-                        Icons.keyboard_arrow_left_outlined,
-                        color: controller.currentIndex.value > 0
-                            ? ColorsTheme.neutralColor[1000]
-                            : ColorsTheme.primaryColor,
-                      ),
-                      backgroundColor: controller.currentIndex.value > 0
-                          ? ColorsTheme.primaryColor
-                          : ColorsTheme.neutralColor[1000],
-                    ),
-                    gap(16),
-                    _iconButtonBuilder(
-                      onTap: () {
-                        controller.nextPage();
-                      },
-                      icon: Icon(
-                        Icons.keyboard_arrow_right_outlined,
-                        color: controller.currentIndex.value <
-                                controller.imageList.length - 1
-                            ? ColorsTheme.neutralColor[1000]
-                            : ColorsTheme.primaryColor,
-                      ),
-                      backgroundColor: controller.currentIndex.value <
-                              controller.imageList.length - 1
-                          ? ColorsTheme.primaryColor
-                          : ColorsTheme.neutralColor[1000],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+      child: SizedBox(
+        height: 240,
+        width: double.infinity,
+        child: Image.asset(
+          controller.imageList[0],
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -162,28 +114,22 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
-          InkWell(
-            onTap: () {},
-            splashFactory: NoSplash.splashFactory,
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  color: ColorsTheme.primaryColor,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                color: ColorsTheme.primaryColor,
+              ),
+              gap(8),
+              Expanded(
+                child: Text(
+                  "Jl. Kenanga Pasar IV No. 1, Jakarta Utara, DKI Jakarta, Indonesia, 14450, Jakarta Utara, DKI Jakarta, Indonesia",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                gap(8),
-                Expanded(
-                  child: Text(
-                    "Jl. Kenanga Pasar IV No. 1, Jakarta Utara, DKI Jakarta, Indonesia, 14450, Jakarta Utara, DKI Jakarta, Indonesia",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           gap(8),
           Text(
@@ -197,6 +143,61 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  Widget _descriptionBuilder() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Deskripsi Kost",
+            style: TypographyTheme.labelLarge,
+          ),
+          gap(8),
+          Text(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+        ],
+      ),
+    );
+  }
+
+  Widget _facilityDescriptionBuilder() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Fasilitas",
+            style: TypographyTheme.labelLarge,
+          ),
+          gap(8),
+          Text(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+        ],
+      ),
+    );
+  }
+
+  Widget _rulesDescriptionBuilder() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Peraturan Khusus Kos",
+            style: TypographyTheme.labelLarge,
+          ),
+          gap(8),
+          Text(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+        ],
+      ),
+    );
+  }
+
+  @Deprecated("Moving to [_facilityDescriptionBuilder()]")
   Widget _specificationBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -261,6 +262,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  @Deprecated("Moving to [_descriptionBuilder()]")
   Widget _bathFacilityBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -301,6 +303,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  @Deprecated("Moving to [_rulesDescriptionBuilder()]")
   Widget _rulesBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -386,66 +389,50 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
   Widget _bottomButtonBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.all(8),
-              ),
-              minimumSize: MaterialStateProperty.all(
-                const Size(64, 48),
-              ),
-              side: MaterialStateProperty.all(
-                BorderSide(color: ColorsTheme.primaryColor),
-              ),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-            icon: FaIcon(
-              FontAwesomeIcons.whatsapp,
-              color: ColorsTheme.primaryColor,
-            ),
-          ),
-          gap(8),
-          Expanded(
-            child: MainButton(
-              label: "Ajukan Sewa",
-              buttonWidth: ButtonWidth.full,
-              onTap: () {
-                controller.navigateToOrderForm();
-              },
-            ),
-          )
-        ],
+      child: MainButton(
+        label: "Ajukan Sewa",
+        buttonWidth: ButtonWidth.full,
+        onTap: () {
+          controller.navigateToOrderForm();
+        },
       ),
-    );
-  }
-
-  Widget _iconButtonBuilder({
-    required Function() onTap,
-    required Widget icon,
-    Color? backgroundColor,
-  }) {
-    return IconButton(
-      onPressed: () {
-        onTap();
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          backgroundColor ?? ColorsTheme.neutralColor[1000],
-        ),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-      icon: icon,
+      // child: Row(
+      //   children: [
+      //     IconButton(
+      //       onPressed: () {},
+      //       style: ButtonStyle(
+      //         padding: MaterialStateProperty.all(
+      //           const EdgeInsets.all(8),
+      //         ),
+      //         minimumSize: MaterialStateProperty.all(
+      //           const Size(64, 48),
+      //         ),
+      //         side: MaterialStateProperty.all(
+      //           BorderSide(color: ColorsTheme.primaryColor),
+      //         ),
+      //         shape: MaterialStateProperty.all(
+      //           RoundedRectangleBorder(
+      //             borderRadius: BorderRadius.circular(8),
+      //           ),
+      //         ),
+      //       ),
+      //       icon: FaIcon(
+      //         FontAwesomeIcons.whatsapp,
+      //         color: ColorsTheme.primaryColor,
+      //       ),
+      //     ),
+      //     gap(8),
+      //     Expanded(
+      //       child: MainButton(
+      //         label: "Ajukan Sewa",
+      //         buttonWidth: ButtonWidth.full,
+      //         onTap: () {
+      //           controller.navigateToOrderForm();
+      //         },
+      //       ),
+      //     )
+      //   ],
+      // ),
     );
   }
 
@@ -453,20 +440,18 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     required String text,
     required Widget icon,
   }) {
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          icon,
-          gap(8),
-          Expanded(
-            child: Text(
-              text,
-            ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        icon,
+        gap(8),
+        Expanded(
+          child: Text(
+            text,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

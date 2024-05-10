@@ -83,21 +83,21 @@ class SignInView extends BaseView<SignInController> {
             MainPasswordTextInput(
               controller: controller.passwordController,
             ),
-            gap(8),
-            Container(
-              alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: () {
-                  controller.navigateToForgetPassword();
-                },
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                splashFactory: NoSplash.splashFactory,
-                child: Text(
-                  "Lupa Password?",
-                ),
-              ),
-            ),
+            // gap(8),
+            // Container(
+            //   alignment: Alignment.centerRight,
+            //   child: InkWell(
+            //     onTap: () {
+            //       controller.navigateToForgetPassword();
+            //     },
+            //     splashColor: Colors.transparent,
+            //     highlightColor: Colors.transparent,
+            //     splashFactory: NoSplash.splashFactory,
+            //     child: Text(
+            //       "Lupa Password?",
+            //     ),
+            //   ),
+            // ),
             gap(16),
             MainButton(
               onTap: () {
@@ -106,19 +106,19 @@ class SignInView extends BaseView<SignInController> {
               label: "Masuk",
               buttonWidth: ButtonWidth.full,
             ),
-            _authDivider(),
-            MainButton.icon(
-              onTap: () {},
-              icon: SvgPicture.asset(
-                IconAssetConstant.google,
-                height: 16,
-                width: 16,
-              ),
-              color: ColorsTheme.neutralColor[400],
-              label: "Masuk Dengan Google",
-              buttonType: ButtonType.outlined,
-              buttonWidth: ButtonWidth.full,
-            ),
+            // _authDivider(),
+            // MainButton.icon(
+            //   onTap: () {},
+            //   icon: SvgPicture.asset(
+            //     IconAssetConstant.google,
+            //     height: 16,
+            //     width: 16,
+            //   ),
+            //   color: ColorsTheme.neutralColor[400],
+            //   label: "Masuk Dengan Google",
+            //   buttonType: ButtonType.outlined,
+            //   buttonWidth: ButtonWidth.full,
+            // ),
           ],
         ),
       ),

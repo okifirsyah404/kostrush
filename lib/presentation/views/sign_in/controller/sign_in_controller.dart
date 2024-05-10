@@ -43,8 +43,4 @@ class SignInController extends BaseController<NoArguments, NoState> {
   void navigateToSignUp() {
     Get.toNamed(AppRoutes.signUp);
   }
-
-  void navigateToForgetPassword() {
-    Get.toNamed(AppRoutes.forgetPassword);
-  }
 }

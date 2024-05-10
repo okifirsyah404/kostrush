@@ -1,6 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
-import 'package:kostrushapp/presentation/views/reset_password/view/reset_password_view.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../presentation/views/about_us/binding/about_us_binding.dart';
@@ -19,8 +18,6 @@ import '../../presentation/views/duration_selector/binding/duration_selector_bin
 import '../../presentation/views/duration_selector/view/duration_selector_view.dart';
 import '../../presentation/views/edit_profile/binding/edit_profile_binding.dart';
 import '../../presentation/views/edit_profile/view/edit_profile_view.dart';
-import '../../presentation/views/forget_password/binding/forget_password_binding.dart';
-import '../../presentation/views/forget_password/view/forget_password_view.dart';
 import '../../presentation/views/help_center/binding/help_center_binding.dart';
 import '../../presentation/views/help_center/view/help_center_view.dart';
 import '../../presentation/views/location_result/binding/location_result_binding.dart';
@@ -35,11 +32,8 @@ import '../../presentation/views/main/tabs/transaction/view/transaction_view.dar
 import '../../presentation/views/main/view/main_view.dart';
 import '../../presentation/views/order_form/binding/order_form_binding.dart';
 import '../../presentation/views/order_form/view/order_form_view.dart';
-import '../../presentation/views/otp/binding/otp_binding.dart';
-import '../../presentation/views/otp/view/otp_view.dart';
 import '../../presentation/views/policy/binding/policy_binding.dart';
 import '../../presentation/views/policy/view/policy_view.dart';
-import '../../presentation/views/reset_password/binding/reset_password_binding.dart';
 import '../../presentation/views/search/binding/search_binding.dart';
 import '../../presentation/views/search/view/search_view.dart';
 import '../../presentation/views/selected_result/binding/selected_result_binding.dart';
@@ -81,21 +75,6 @@ class AppPages {
       name: AppRoutes.signUpAccount,
       page: () => const AccountSignUpView(),
       binding: AccountSignUpBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.forgetPassword,
-      page: () => const ForgetPasswordView(),
-      binding: ForgetPasswordBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.resetPassword,
-      page: () => const ResetPasswordView(),
-      binding: ResetPasswordBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.otp,
-      page: () => const OtpView(),
-      binding: OtpBinding(),
     ),
     GetPage(
       name: AppRoutes.success,

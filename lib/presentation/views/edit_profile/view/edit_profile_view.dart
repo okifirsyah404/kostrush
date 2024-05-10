@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:kostrushapp/presentation/components/button/main_button.dart';
 import 'package:kostrushapp/presentation/components/input/main_text_input.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
@@ -43,26 +42,16 @@ class EditProfileView extends BaseView<EditProfileController> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Obx(
-          () => controller.imageFile.value != null
-              ? CircleImage.file(
-                  imageFile: controller.imageFile.value?.path ?? "",
-                  radius: 50,
-                )
-              : CircleImage.network(
-                  imageEndpoint: "",
-                  radius: 50,
-                ),
-        ),
+        controller.imageFile.value != null
+            ? CircleImage.file(
+                imageFile: controller.imageFile.value?.path ?? "",
+                radius: 50,
+              )
+            : CircleImage.network(
+                imageEndpoint: "",
+                radius: 50,
+              ),
         gap(8),
-        MainButton.icon(
-          label: "Ubah Foto",
-          icon: const Icon(Icons.camera_alt_outlined),
-          buttonType: ButtonType.outlined,
-          onTap: () {
-            controller.openCameraOrGalleryDialog();
-          },
-        )
       ],
     );
   }
