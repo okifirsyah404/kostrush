@@ -147,8 +147,10 @@ class DashboardView extends BaseView<DashboardController> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               separatorBuilder: (context, index) => SizedBox(width: 8.0),
-              itemCount: 4,
+              itemCount: controller.state?.recommendedKost.kosts?.length ?? 0,
               itemBuilder: (context, index) {
+                final kost = controller.state?.recommendedKost.kosts?[index];
+
                 return DormCard(
                   dormGenderEnum: DormGenderEnum.MALE,
                   price: (index + 1) * 100000,

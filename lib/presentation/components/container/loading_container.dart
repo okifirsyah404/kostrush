@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kostrushapp/presentation/themes/color_theme.dart';
 
 /// Class ini digunakan untuk membuat container loading
 class LoadingContainer extends StatelessWidget {
@@ -29,7 +30,7 @@ class LoadingContainer extends StatelessWidget {
             ),
             child: CircularProgressIndicator(
               // TODO: Change the color of the CircularProgressIndicator
-              color: Colors.blue,
+              color: ColorsTheme.primaryColor,
               strokeCap: StrokeCap.round,
               strokeWidth: 8,
             ),

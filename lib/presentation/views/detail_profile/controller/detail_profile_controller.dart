@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kostrushapp/data/model/profile_model.dart';
 import 'package:kostrushapp/presentation/components/focus_node/no_focus_node.dart';
 
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
-import '../../../../base/base_state.dart';
+import '../../../../domain/repository/main_repository.dart';
 
-class DetailProfileController extends BaseController<NoArguments, NoState> {
+class DetailProfileController
+    extends BaseController<NoArguments, ProfileModel> {
+  final _mainRepository = Get.find<MainRepository>();
+
   late TextEditingController nameController;
   late TextEditingController occupationController;
   late TextEditingController phoneController;
@@ -31,7 +36,33 @@ class DetailProfileController extends BaseController<NoArguments, NoState> {
 
   @override
   Future<void> onProcess() async {
-    // TODO: implement onProcess
+    emitLoading();
+
+    final data = await _mainRepository.getProfile();
+
+    data.fold((exception) {
+      emitError(exception.toString());
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Something went wrong. Please try again later."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
+    }, (response) {
+      emitSuccess(response);
+
+      nameController.text = response.name ?? "";
+      occupationController.text = response.occupation ?? "";
+      phoneController.text = response.phoneNumber ?? "";
+      addressController.text = response.address ?? "";
+      emailController.text = response.email ?? "";
+    });
   }
 
   @override
