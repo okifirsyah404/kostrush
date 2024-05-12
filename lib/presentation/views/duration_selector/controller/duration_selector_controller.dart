@@ -11,11 +11,8 @@ class DurationSelectorController
 
   List<DurationItem> durations = [
     DurationItem(duration: "1 Bulan", value: 1),
-    DurationItem(duration: "2 Bulan", value: 1),
+    DurationItem(duration: "2 Bulan", value: 2),
     DurationItem(duration: "3 Bulan", value: 3),
-    DurationItem(duration: "6 Bulan", value: 6),
-    DurationItem(duration: "1 Tahun", value: 12),
-    DurationItem(duration: "2 Tahun", value: 24),
   ];
 
   @override

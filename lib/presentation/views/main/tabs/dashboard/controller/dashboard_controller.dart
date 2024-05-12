@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/data/model/dashboard_model.dart';
 import 'package:kostrushapp/presentation/components/focus_node/no_focus_node.dart';
+import 'package:kostrushapp/presentation/views/detail_dormitory/argument/detail_dormitory_argument.dart';
 import 'package:kostrushapp/presentation/views/selected_result/argument/selected_result_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../../../base/base_controller.dart';
+import '../../../../../../data/network/response/kost_response.dart';
 import '../../../../../../domain/repository/main_repository.dart';
 import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../location_result/argument/location_result_argument.dart';
@@ -118,7 +120,7 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
         emitError(exception.toString());
         Get.dialog(AlertDialog(
           title: Text("Error"),
-          content: Text("Email atau password salah"),
+          content: Text("Terjadi kesalahan saat mengambil data dari server"),
           actions: [
             TextButton(
               onPressed: () {
@@ -145,8 +147,32 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
     Get.toNamed(AppRoutes.search);
   }
 
-  void navigateToDetailDormitory() {
-    Get.toNamed(AppRoutes.detailDormitory);
+  void navigateToRecommendedDormitoryDetail(int index) {
+    _navigateToDetailDormitory(state!.recommendedKost.kosts?[index]);
+  }
+
+  void navigateToCheapDormitoryDetail(int index) {
+    _navigateToDetailDormitory(state!.cheapKost.kosts?[index]);
+  }
+
+  void _navigateToDetailDormitory(Kost? kost) {
+    if (kost != null) {
+      Get.toNamed(AppRoutes.detailDormitory,
+          arguments: DetailDormitoryArgument(kost));
+    } else {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Data tidak ditemukan"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
+    }
   }
 
   @override

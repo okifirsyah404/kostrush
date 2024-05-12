@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/base/base_state.dart';
@@ -14,8 +14,6 @@ class SignUpController extends BaseController<NoArguments, NoState> {
   late TextEditingController addressController;
 
   RxBool isAgree = false.obs;
-
-  final formKey = GlobalKey<FormState>();
 
   @override
   void initComponent() {
@@ -45,6 +43,94 @@ class SignUpController extends BaseController<NoArguments, NoState> {
   }
 
   void navigateToAccountSignUp() {
+    if (nameController.text.isEmpty) {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Nama tidak boleh kosong"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
+      return;
+    }
+
+    if (occupationController.text.isEmpty) {
+      Get.dialog(
+        AlertDialog(
+          title: Text("Error"),
+          content: Text("Pekerjaan tidak boleh kosong"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    if (phoneController.text.isEmpty) {
+      Get.dialog(
+        AlertDialog(
+          title: Text("Error"),
+          content: Text("Nomor telepon tidak boleh kosong"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    if (addressController.text.isEmpty) {
+      Get.dialog(
+        AlertDialog(
+          title: Text("Error"),
+          content: Text("Alamat tidak boleh kosong"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    if (!isAgree.value) {
+      Get.dialog(
+        AlertDialog(
+          title: Text("Error"),
+          content: Text("Anda harus menyetujui syarat dan ketentuan"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
     Get.toNamed(
       AppRoutes.signUpAccount,
       arguments: AccountSignUpArgument(

@@ -19,4 +19,16 @@ abstract class AuthService {
   Future<void> signOut(
     @Header('Authorization') String token,
   );
+
+  @POST('/api/apiregister')
+  Future<void> signUp({
+    @Field() required String name,
+    @Field() required String email,
+    @Field() required String password,
+    @Field("alamat") required String address,
+    @Field("no_hp") required String phoneNumber,
+    @Field("pekerjaan") required String occupation,
+    @Field("tgl_lahir") required String dateBirth,
+    @Field("jenis_kelamin") required String gender,
+  });
 }

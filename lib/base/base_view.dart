@@ -49,7 +49,7 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
 
   /// Method ini digunakan untuk mengatur on try again
   VoidCallback? onTryAgain() {
-    return null;
+    onRefresh();
   }
 
   /// Method ini digunakan untuk melakukan refresh pada view
@@ -75,8 +75,25 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
         //   },
         // ),
         onError: (error) {
-          return const SizedBox();
+          return errorContainer(error ?? "Terjadi kesalahan");
         },
+      ),
+    );
+  }
+
+  Widget errorContainer(String message) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(message),
+          TextButton(
+            onPressed: () {
+              onTryAgain();
+            },
+            child: const Text("Coba Lagi"),
+          ),
+        ],
       ),
     );
   }

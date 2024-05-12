@@ -45,38 +45,35 @@ class SignUpView extends BaseView<SignUpController> {
   }
 
   Widget _formBuilder() {
-    return Form(
-      key: controller.formKey,
-      child: Column(
-        children: [
-          MainTextInput(
-            label: "Nama Lengkap",
-            hintText: "Masukkan Nama Lengkap Anda",
-            controller: controller.nameController,
-          ),
-          gap(16),
-          MainTextInput(
-            label: "Pekerjaan",
-            hintText: "Masukkan Pekerjaan Anda",
-            controller: controller.occupationController,
-          ),
-          gap(16),
-          MainTextInput(
-            label: "Nomor Telepon",
-            hintText: "Masukkan Nomor Telepon Anda",
-            controller: controller.phoneController,
-            inputType: TextInputType.phone,
-          ),
-          gap(16),
-          MainTextInput(
-            label: "Alamat",
-            hintText: "Masukkan Alamat Anda",
-            controller: controller.addressController,
-            maxLines: 6,
-          ),
-          gap(16),
-        ],
-      ),
+    return Column(
+      children: [
+        MainTextInput(
+          label: "Nama Lengkap",
+          hintText: "Masukkan Nama Lengkap Anda",
+          controller: controller.nameController,
+        ),
+        gap(16),
+        MainTextInput(
+          label: "Pekerjaan",
+          hintText: "Masukkan Pekerjaan Anda",
+          controller: controller.occupationController,
+        ),
+        gap(16),
+        MainTextInput(
+          label: "Nomor Telepon",
+          hintText: "Masukkan Nomor Telepon Anda",
+          controller: controller.phoneController,
+          inputType: TextInputType.phone,
+        ),
+        gap(16),
+        MainTextInput(
+          label: "Alamat",
+          hintText: "Masukkan Alamat Anda",
+          controller: controller.addressController,
+          maxLines: 6,
+        ),
+        gap(16),
+      ],
     );
   }
 

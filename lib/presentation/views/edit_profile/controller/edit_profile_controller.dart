@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
+import 'package:kostrushapp/data/network/response/profile_response.dart';
 
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
@@ -60,6 +61,36 @@ class EditProfileController extends BaseController<NoArguments, ProfileModel> {
       phoneController.text = response.phoneNumber ?? "";
       addressController.text = response.address ?? "";
       emailController.text = response.email ?? "";
+    });
+  }
+
+  Future<void> updateProfile() async {
+    final data = await _mainRepository.editProfile(
+      ProfileResponseData(
+        name: nameController.text,
+        occupation: occupationController.text,
+        address: addressController.text,
+        phoneNumber: phoneController.text,
+        email: emailController.text,
+      ),
+    );
+
+    data.fold((exception) {
+      emitError(exception.toString());
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Something went wrong. Please try again later."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
+    }, (response) {
+      Get.back();
     });
   }
 

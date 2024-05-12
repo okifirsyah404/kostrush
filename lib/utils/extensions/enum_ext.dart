@@ -46,9 +46,9 @@ extension GenderEnumExtension on GenderEnum {
   String get value {
     switch (this) {
       case GenderEnum.Male:
-        return "Laki-laki";
+        return "laki-laki";
       case GenderEnum.Female:
-        return "Perempuan";
+        return "perempuan";
       default:
         return "";
     }

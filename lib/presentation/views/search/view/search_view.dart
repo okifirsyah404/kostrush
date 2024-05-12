@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:kostrushapp/presentation/components/appbar/search_appbar.dart';
 
 import '../../../../base/base_view.dart';
-import '../../../../data/enum/dorm_gender_enum.dart';
 import '../../../components/card/dorm_card.dart';
 import '../controller/search_controller.dart';
 
@@ -15,6 +13,7 @@ class SearchView extends BaseView<SearchViewController> {
     return SearchAppBar(
       controller: controller.searchController,
       focusNode: controller.focusNode,
+      onChanged: controller.onChangeSearch,
     );
   }
 
@@ -22,26 +21,46 @@ class SearchView extends BaseView<SearchViewController> {
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          mainAxisExtent: 240,
-        ),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Center(
-            child: DormCard(
-              dormGenderEnum: DormGenderEnum.MALE,
-              price: (index + 1) * 100000,
-              name: "Kost Pak Agung ${index + 1}",
-              address: "Jl. Raya Nganjuk No. ${index + 1}",
-              maxImageWidth: Get.width,
+      child: (controller.state?.kosts ?? []).isNotEmpty
+          ? GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                mainAxisExtent: 240,
+              ),
+              itemCount: controller.state?.kosts?.length ?? 0,
+              itemBuilder: (context, index) {
+                final kost = controller.state?.kosts?[index];
+
+                return Center(
+                  child: DormCard(
+                    type: kost?.type ?? "",
+                    price: kost?.startPrice ?? 0,
+                    name: kost?.name ?? "",
+                    address: kost?.address ?? "",
+                    onTap: () {
+                      controller.navigateToDetailDormitory(kost);
+                    },
+                  ),
+                );
+              },
+            )
+          : const Center(
+              child: Text("Data tidak ditemukan"),
             ),
-          );
-        },
+    );
+  }
+
+  @override
+  Widget errorContainer(String message) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Belum ada data"),
+        ],
       ),
     );
   }

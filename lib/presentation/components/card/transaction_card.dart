@@ -55,14 +55,14 @@ class TransactionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Kosan Alif Berwarna Merah Yang Terang Hahahaya",
+                      name,
                       style: TypographyTheme.labelMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Gap(4),
                     Text(
-                      "Jl. Raya Ciputat Parung No. 1, Ciputat, Tangerang Selatan",
+                      address,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

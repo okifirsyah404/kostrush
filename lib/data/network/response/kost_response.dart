@@ -16,6 +16,7 @@ class KostResponse {
   Map<String, dynamic> toJson() => _$KostResponseToJson(this);
 }
 
+@JsonSerializable()
 class Kost {
   @JsonKey(name: 'id_kost')
   final int? id;
@@ -31,6 +32,10 @@ class Kost {
   final String? facilities;
   @JsonKey(name: 'tipe')
   final String? type;
+  @JsonKey(name: "harga_terendah")
+  final int? startPrice;
+  @JsonKey(name: "harga_tertinggi")
+  final int? endPrice;
 
   Kost({
     this.id,
@@ -40,25 +45,11 @@ class Kost {
     this.rules,
     this.facilities,
     this.type,
+    this.startPrice,
+    this.endPrice,
   });
 
-  factory Kost.fromJson(Map<String, dynamic> json) => Kost(
-        id: json['id_kost'],
-        name: json['nama_kost'],
-        address: json['alamat'],
-        subLocality: json['kecamatan'],
-        rules: json['peraturan'],
-        facilities: json['fasilitas'],
-        type: json['tipe'],
-      );
+  factory Kost.fromJson(Map<String, dynamic> json) => _$KostFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        'id_kost': id,
-        'nama_kost': name,
-        'alamat': address,
-        'kecamatan': subLocality,
-        'peraturan': rules,
-        'fasilitas': facilities,
-        'tipe': type,
-      };
+  Map<String, dynamic> toJson() => _$KostToJson(this);
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kostrushapp/presentation/views/detail_transaction/argument/detail_transaction_argument.dart';
+import 'package:kostrushapp/utils/extensions/date_time_ext.dart';
 
-import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../base/base_state.dart';
 import '../../../components/focus_node/no_focus_node.dart';
 
-class DetailTransactionController extends BaseController<NoArguments, NoState> {
+class DetailTransactionController
+    extends BaseController<DetailTransactionArgument, NoState> {
   late TextEditingController nameController;
   late TextEditingController phoneController;
   late TextEditingController occupationController;
@@ -24,6 +26,14 @@ class DetailTransactionController extends BaseController<NoArguments, NoState> {
     dateController = TextEditingController();
     durationController = TextEditingController();
     noFocusNode = NoFocusNode();
+
+    nameController.text = arguments.profile.name ?? "";
+    phoneController.text = arguments.profile.phoneNumber ?? "";
+    occupationController.text = arguments.profile.occupation ?? "";
+    roomTypeController.text = "Regular";
+    dateController.text =
+        arguments.transaction.tanggalMasuk?.formatDate() ?? "";
+    durationController.text = "1";
   }
 
   @override

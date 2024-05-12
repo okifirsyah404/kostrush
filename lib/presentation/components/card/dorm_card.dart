@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:kostrushapp/data/enum/dorm_gender_enum.dart';
 import 'package:kostrushapp/presentation/components/chip/tag_chip.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
-import 'package:kostrushapp/utils/extensions/enum_ext.dart';
 import 'package:kostrushapp/utils/extensions/int_ext.dart';
 
 /// Class ini digunakan untuk membuat card kos-kosan
 class DormCard extends StatelessWidget {
   const DormCard({
     Key? key,
-    required this.dormGenderEnum,
+    required this.type,
     required this.name,
     required this.address,
     required this.price,
@@ -20,7 +18,7 @@ class DormCard extends StatelessWidget {
 
   final String name, address;
   final int price;
-  final DormGenderEnum dormGenderEnum;
+  final String type;
   final double maxImageWidth;
   final Function()? onTap;
 
@@ -57,7 +55,7 @@ class DormCard extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TagChip.filled(text: dormGenderEnum.value),
+                    TagChip.filled(text: type),
                   ],
                 ),
                 const Gap(4),
@@ -75,7 +73,7 @@ class DormCard extends StatelessWidget {
                 ),
                 const Gap(4),
                 Text(
-                  price.toRupiah() + " / Bulan",
+                  "${price.toRupiah()} / Bulan",
                   style: TypographyTheme.bodySmall,
                 ),
               ],

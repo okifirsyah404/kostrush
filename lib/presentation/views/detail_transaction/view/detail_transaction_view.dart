@@ -5,6 +5,7 @@ import 'package:kostrushapp/data/enum/transaction_status_enum.dart';
 import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 import 'package:kostrushapp/utils/extensions/enum_ext.dart';
+import 'package:kostrushapp/utils/extensions/int_ext.dart';
 import 'package:kostrushapp/utils/mixins/custom_sliver_mixin.dart';
 
 import '../../../../base/base_view.dart';
@@ -131,29 +132,6 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             "Biaya Sewa Kost",
             style: TypographyTheme.labelLarge,
           ),
-          gap(16),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Harga Sewa",
-                    style: TypographyTheme.bodyMedium,
-                  ),
-                  Text(
-                    "Pemabayaran diakukan secara tunai",
-                    style: TypographyTheme.bodySmall,
-                  )
-                ],
-              ),
-              const Spacer(),
-              Text(
-                "Rp 1.000.000",
-                style: TypographyTheme.labelMedium,
-              ),
-            ],
-          ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: CustomPaint(
@@ -171,7 +149,7 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
               ),
               const Spacer(),
               Text(
-                "Rp 1.000.000",
+                (controller.arguments.transaction.biaya ?? 0).toRupiah(),
                 style: TypographyTheme.labelLarge,
               ),
             ],
@@ -190,12 +168,14 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             width: Get.width,
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
-              color: ColorsTheme.primaryColor,
+              color: _statusColor(
+                  controller.arguments.transaction.statusTransaksi ??
+                      TransactionStatusEnum.pending),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Text(
-                "Selesai",
+                controller.arguments.transaction.statusTransaksi?.value ?? "",
                 style: TypographyTheme.labelMedium.copyWith(
                   color: ColorsTheme.neutralColor[1000],
                 ),
@@ -204,11 +184,22 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
           ),
           gap(8),
           Text(
-            TransactionStatusEnum.done.message,
+            controller.arguments.transaction.statusTransaksi?.message ?? "",
             textAlign: TextAlign.center,
           )
         ],
       ),
     );
+  }
+
+  Color? _statusColor(TransactionStatusEnum status) {
+    switch (status) {
+      case TransactionStatusEnum.pending:
+        return ColorsTheme.secondaryColor;
+      case TransactionStatusEnum.processing:
+        return ColorsTheme.primaryColor[900];
+      default:
+        return ColorsTheme.primaryColor;
+    }
   }
 }

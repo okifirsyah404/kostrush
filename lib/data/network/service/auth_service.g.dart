@@ -76,6 +76,48 @@ class _AuthService implements AuthService {
         ))));
   }
 
+  @override
+  Future<void> signUp({
+    required String name,
+    required String email,
+    required String password,
+    required String address,
+    required String phoneNumber,
+    required String occupation,
+    required String dateBirth,
+    required String gender,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'name': name,
+      'email': email,
+      'password': password,
+      'alamat': address,
+      'no_hp': phoneNumber,
+      'pekerjaan': occupation,
+      'tgl_lahir': dateBirth,
+      'jenis_kelamin': gender,
+    };
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/apiregister',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

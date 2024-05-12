@@ -1,6 +1,5 @@
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:kostrushapp/data/enum/dorm_gender_enum.dart';
 import 'package:kostrushapp/presentation/components/appbar/dashboard_app_bar.dart';
 import 'package:kostrushapp/presentation/components/card/dorm_card.dart';
 import 'package:kostrushapp/presentation/components/card/location_card.dart';
@@ -152,12 +151,12 @@ class DashboardView extends BaseView<DashboardController> {
                 final kost = controller.state?.recommendedKost.kosts?[index];
 
                 return DormCard(
-                  dormGenderEnum: DormGenderEnum.MALE,
-                  price: (index + 1) * 100000,
-                  name: "Kost Pak Agung ${index + 1}",
-                  address: "Jl. Raya Nganjuk No. ${index + 1}",
+                  type: kost?.type ?? "",
+                  price: kost?.startPrice ?? 0,
+                  name: kost?.name ?? "",
+                  address: kost?.address ?? "",
                   onTap: () {
-                    controller.navigateToDetailDormitory();
+                    controller.navigateToCheapDormitoryDetail(index);
                   },
                 );
               },
@@ -206,15 +205,17 @@ class DashboardView extends BaseView<DashboardController> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               separatorBuilder: (context, index) => SizedBox(width: 8.0),
-              itemCount: 4,
+              itemCount: controller.state?.cheapKost.kosts?.length ?? 0,
               itemBuilder: (context, index) {
+                final kost = controller.state?.cheapKost.kosts?[index];
+
                 return DormCard(
-                  dormGenderEnum: DormGenderEnum.FEMALE,
-                  price: (index + 1) * 100000,
-                  name: "Kost Bu Sani ${index + 1}",
-                  address: "Jl. Raya Nganjuk No. ${index + 1}",
+                  type: kost?.type ?? "",
+                  price: kost?.startPrice ?? 0,
+                  name: kost?.name ?? "",
+                  address: kost?.address ?? "",
                   onTap: () {
-                    controller.navigateToDetailDormitory();
+                    controller.navigateToCheapDormitoryDetail(index);
                   },
                 );
               },

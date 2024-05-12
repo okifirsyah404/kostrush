@@ -44,23 +44,8 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
                 ),
                 sliverDivider(),
                 SliverToBoxAdapter(
-                  child: _facilityDescriptionBuilder(),
-                ),
-                sliverDivider(),
-                SliverToBoxAdapter(
                   child: _rulesDescriptionBuilder(),
                 ),
-                // SliverToBoxAdapter(
-                //   child: _specificationBuilder(),
-                // ),
-                // sliverDivider(),
-                // SliverToBoxAdapter(
-                //   child: _bathFacilityBuilder(),
-                // ),
-                // sliverDivider(),
-                // SliverToBoxAdapter(
-                //   child: _rulesBuilder(),
-                // ),
               ],
             ),
           ),
@@ -93,24 +78,20 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Kos Kenanga Pasar IV",
+            controller.arguments.kost.name ?? "",
             style: TypographyTheme.titleLarge,
           ),
           gap(16),
           Row(
             children: [
               TagChip.filled(
-                text: "Tipe Premium",
-              ),
-              gap(8),
-              TagChip.filled(
-                text: "Putra",
+                text: controller.arguments.kost.type ?? "",
               ),
             ],
           ),
           gap(8),
           Text(
-            1000000.toRupiah() + " / Bulan",
+            "Mulai Dari ${(controller.arguments.kost.startPrice ?? 0).toRupiah()} / Bulan",
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
@@ -124,19 +105,12 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
               gap(8),
               Expanded(
                 child: Text(
-                  "Jl. Kenanga Pasar IV No. 1, Jakarta Utara, DKI Jakarta, Indonesia, 14450, Jakarta Utara, DKI Jakarta, Indonesia",
+                  controller.arguments.kost.address ?? "",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
-          ),
-          gap(8),
-          Text(
-            "2 Kamar Tersedia",
-            style: TypographyTheme.labelMedium.copyWith(
-              color: ColorsTheme.successColor,
-            ),
           ),
         ],
       ),
@@ -150,30 +124,11 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Deskripsi Kost",
-            style: TypographyTheme.labelLarge,
-          ),
-          gap(8),
-          Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-        ],
-      ),
-    );
-  }
-
-  Widget _facilityDescriptionBuilder() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
             "Fasilitas",
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
-          Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+          Text(controller.arguments.kost.facilities ?? ""),
         ],
       ),
     );
@@ -190,8 +145,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
-          Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+          Text(controller.arguments.kost.rules ?? ""),
         ],
       ),
     );

@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../base/base_state.dart';
@@ -23,7 +27,56 @@ class AboutUsController extends BaseController<NoArguments, NoState> {
     // TODO: implement disposeComponent
   }
 
-  void intentToInstagram() {}
+  void intentToInstagram() async {
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'www.instagram.com',
+      path: 'Yugas12',
+    );
 
-  void intentToEmail() {}
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Could not launch Instagram'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void intentToEmail() async {
+    final Uri url = Uri(
+      scheme: 'mailto',
+      path: 'wahyuprastyo907@gmail.com',
+    );
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Could not launch Email'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 }

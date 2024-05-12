@@ -94,7 +94,12 @@ class EditProfileView extends BaseView<EditProfileController> {
         ),
         gap(16),
         MainButton(
-            label: "Simpan", onTap: () {}, buttonWidth: ButtonWidth.full),
+          label: "Simpan",
+          onTap: () {
+            controller.updateProfile();
+          },
+          buttonWidth: ButtonWidth.full,
+        ),
       ],
     );
   }

@@ -29,10 +29,10 @@ class AccountSignUpView extends BaseView<AccountSignUpController> {
             _formBuilder(),
             gap(16),
             MainButton(
-              label: "Kirim Kode OTP",
+              label: "Daftar",
               buttonWidth: ButtonWidth.full,
               onTap: () {
-                controller.navigateToOtp();
+                controller.register();
               },
             ),
           ],
