@@ -107,7 +107,6 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             label: "Tanggal Mulai Sewa",
             hintText: "Pilih Tanggal",
             focusNode: controller.noFocusNode,
-            suffixIcon: const FaIcon(FontAwesomeIcons.calendarAlt),
           ),
           gap(8),
           MainTextInput(
@@ -115,7 +114,6 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             label: "Durasi Sewa",
             hintText: "Pilih Durasi",
             focusNode: controller.noFocusNode,
-            suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
           ),
         ],
       ),
@@ -149,7 +147,7 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
               ),
               const Spacer(),
               Text(
-                (controller.arguments.transaction.biaya ?? 0).toRupiah(),
+                (controller.state?.total ?? 0).toRupiah(),
                 style: TypographyTheme.labelLarge,
               ),
             ],
@@ -169,13 +167,12 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
               color: _statusColor(
-                  controller.arguments.transaction.statusTransaksi ??
-                      TransactionStatusEnum.pending),
+                  controller.state?.status ?? TransactionStatusEnum.pending),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Text(
-                controller.arguments.transaction.statusTransaksi?.value ?? "",
+                controller.state?.status?.value ?? "",
                 style: TypographyTheme.labelMedium.copyWith(
                   color: ColorsTheme.neutralColor[1000],
                 ),
@@ -184,7 +181,7 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
           ),
           gap(8),
           Text(
-            controller.arguments.transaction.statusTransaksi?.message ?? "",
+            controller.state?.status?.message ?? "",
             textAlign: TextAlign.center,
           )
         ],

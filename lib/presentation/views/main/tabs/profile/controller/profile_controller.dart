@@ -53,8 +53,9 @@ class ProfileController extends BaseController<NoArguments, ProfileModel> {
     // TODO: implement disposeComponent
   }
 
-  void navigateToEditProfile() {
-    Get.toNamed(AppRoutes.editProfile);
+  void navigateToEditProfile() async {
+    await Get.toNamed(AppRoutes.editProfile);
+    onRefresh();
   }
 
   void navigateToDetailProfile() {
@@ -66,7 +67,7 @@ class ProfileController extends BaseController<NoArguments, ProfileModel> {
       AppRoutes.changePassword,
       arguments: ChangePasswordArgument(
         context: OtpPurposeEnum.changePassword,
-        email: "test@email.com",
+        email: state?.email ?? "",
       ),
     );
   }

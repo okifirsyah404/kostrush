@@ -29,12 +29,12 @@ class ChangePasswordView extends BaseView<ChangePasswordController> {
           ),
           gap(16),
           MainPasswordTextInput(
-              controller: controller.oldPasswordController,
-              label: "Kata Sandi Lama"),
-          gap(16),
-          MainPasswordTextInput(
               controller: controller.newPasswordController,
               label: "Kata Sandi Baru"),
+          gap(16),
+          MainPasswordTextInput(
+              controller: controller.newRePasswordController,
+              label: "Ulangi Kata Sandi Baru"),
           gap(16),
           MainButton(
             label: "Ubah Kata Sandi",

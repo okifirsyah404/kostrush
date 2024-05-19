@@ -146,9 +146,9 @@ class DashboardView extends BaseView<DashboardController> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               separatorBuilder: (context, index) => SizedBox(width: 8.0),
-              itemCount: controller.state?.recommendedKost.kosts?.length ?? 0,
+              itemCount: controller.state?.recommendedKost.length ?? 0,
               itemBuilder: (context, index) {
-                final kost = controller.state?.recommendedKost.kosts?[index];
+                final kost = controller.state?.recommendedKost[index];
 
                 return DormCard(
                   type: kost?.type ?? "",
@@ -205,9 +205,9 @@ class DashboardView extends BaseView<DashboardController> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               separatorBuilder: (context, index) => SizedBox(width: 8.0),
-              itemCount: controller.state?.cheapKost.kosts?.length ?? 0,
+              itemCount: controller.state?.cheapKost.length ?? 0,
               itemBuilder: (context, index) {
-                final kost = controller.state?.cheapKost.kosts?[index];
+                final kost = controller.state?.cheapKost[index];
 
                 return DormCard(
                   type: kost?.type ?? "",

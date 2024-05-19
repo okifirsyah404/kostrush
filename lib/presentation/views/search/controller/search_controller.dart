@@ -3,15 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
+import 'package:kostrushapp/domain/repository/kost_repository.dart';
 
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
-import '../../../../domain/repository/main_repository.dart';
 import '../../../../res/routes/app_routes.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
-class SearchViewController extends BaseController<NoArguments, KostResponse> {
-  final _repository = Get.find<MainRepository>();
+class SearchViewController
+    extends BaseController<NoArguments, List<KostResponse>> {
+  final _repository = Get.find<KostRepository>();
 
   late TextEditingController searchController;
   late FocusNode focusNode;
@@ -40,7 +42,23 @@ class SearchViewController extends BaseController<NoArguments, KostResponse> {
     final data = await _repository.searchKost(query);
 
     data.fold(
-      (exception) => emitError(exception.message),
+      (exception) {
+        emitError(exception.message);
+
+        Get.dialog(AlertDialog(
+          title: Text("Error"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ));
+      },
       (result) => emitSuccess(result),
     );
   }
@@ -52,10 +70,10 @@ class SearchViewController extends BaseController<NoArguments, KostResponse> {
     });
   }
 
-  void navigateToDetailDormitory(Kost? kost) {
-    if (kost != null) {
+  void navigateToDetailDormitory(int? kostId) {
+    if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
-          arguments: DetailDormitoryArgument(kost));
+          arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
         title: Text("Error"),

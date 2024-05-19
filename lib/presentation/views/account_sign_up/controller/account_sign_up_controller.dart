@@ -7,6 +7,7 @@ import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../base/base_controller.dart';
 import '../../../../data/enum/otp_purpose_enum.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../success/argument/success_argument.dart';
 
 class AccountSignUpController
@@ -129,20 +130,19 @@ class AccountSignUpController
 
     response.fold(
       (exception) {
-        Get.dialog(
-          AlertDialog(
-            title: Text("Error"),
-            content: Text(exception.toString()),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          ),
-        );
+        Get.dialog(AlertDialog(
+          title: Text("Error"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ));
       },
       (response) {
         Get.toNamed(

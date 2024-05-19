@@ -4,20 +4,6 @@ part 'kost_response.g.dart';
 
 @JsonSerializable()
 class KostResponse {
-  final List<Kost>? kosts;
-
-  KostResponse({
-    this.kosts,
-  });
-
-  factory KostResponse.fromJson(Map<String, dynamic> json) =>
-      _$KostResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$KostResponseToJson(this);
-}
-
-@JsonSerializable()
-class Kost {
   @JsonKey(name: 'id_kost')
   final int? id;
   @JsonKey(name: 'nama_kost')
@@ -37,7 +23,7 @@ class Kost {
   @JsonKey(name: "harga_tertinggi")
   final int? endPrice;
 
-  Kost({
+  KostResponse({
     this.id,
     this.name,
     this.address,
@@ -49,7 +35,8 @@ class Kost {
     this.endPrice,
   });
 
-  factory Kost.fromJson(Map<String, dynamic> json) => _$KostFromJson(json);
+  factory KostResponse.fromJson(Map<String, dynamic> json) =>
+      _$KostResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$KostToJson(this);
+  Map<String, dynamic> toJson() => _$KostResponseToJson(this);
 }

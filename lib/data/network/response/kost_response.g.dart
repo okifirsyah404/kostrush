@@ -7,17 +7,6 @@ part of 'kost_response.dart';
 // **************************************************************************
 
 KostResponse _$KostResponseFromJson(Map<String, dynamic> json) => KostResponse(
-      kosts: (json['kosts'] as List<dynamic>?)
-          ?.map((e) => Kost.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$KostResponseToJson(KostResponse instance) =>
-    <String, dynamic>{
-      'kosts': instance.kosts,
-    };
-
-Kost _$KostFromJson(Map<String, dynamic> json) => Kost(
       id: (json['id_kost'] as num?)?.toInt(),
       name: json['nama_kost'] as String?,
       address: json['alamat'] as String?,
@@ -29,7 +18,8 @@ Kost _$KostFromJson(Map<String, dynamic> json) => Kost(
       endPrice: (json['harga_tertinggi'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$KostToJson(Kost instance) => <String, dynamic>{
+Map<String, dynamic> _$KostResponseToJson(KostResponse instance) =>
+    <String, dynamic>{
       'id_kost': instance.id,
       'nama_kost': instance.name,
       'alamat': instance.address,

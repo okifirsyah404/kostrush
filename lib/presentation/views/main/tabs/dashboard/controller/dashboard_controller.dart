@@ -8,7 +8,6 @@ import 'package:kostrushapp/presentation/views/selected_result/argument/selected
 import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../../../base/base_controller.dart';
-import '../../../../../../data/network/response/kost_response.dart';
 import '../../../../../../domain/repository/main_repository.dart';
 import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../location_result/argument/location_result_argument.dart';
@@ -116,7 +115,7 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
 
     final result = await _mainRepository.getDashboard();
     result.fold(
-      (exception) {
+          (exception) {
         emitError(exception.toString());
         Get.dialog(AlertDialog(
           title: Text("Error"),
@@ -131,7 +130,7 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
           ],
         ));
       },
-      (data) => emitSuccess(data),
+          (data) => emitSuccess(data),
     );
   }
 
@@ -148,17 +147,17 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
   }
 
   void navigateToRecommendedDormitoryDetail(int index) {
-    _navigateToDetailDormitory(state!.recommendedKost.kosts?[index]);
+    _navigateToDetailDormitory(state!.recommendedKost?[index].id);
   }
 
   void navigateToCheapDormitoryDetail(int index) {
-    _navigateToDetailDormitory(state!.cheapKost.kosts?[index]);
+    _navigateToDetailDormitory(state!.cheapKost?[index].id);
   }
 
-  void _navigateToDetailDormitory(Kost? kost) {
-    if (kost != null) {
+  void _navigateToDetailDormitory(int? kostId) {
+    if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
-          arguments: DetailDormitoryArgument(kost));
+          arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
         title: Text("Error"),

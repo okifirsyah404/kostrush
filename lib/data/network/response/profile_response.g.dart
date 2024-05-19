@@ -8,20 +8,6 @@ part of 'profile_response.dart';
 
 ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
     ProfileResponse(
-      message: json['message'] as String?,
-      data: json['data'] == null
-          ? null
-          : ProfileResponseData.fromJson(json['data'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'data': instance.data,
-    };
-
-ProfileResponseData _$ProfileResponseDataFromJson(Map<String, dynamic> json) =>
-    ProfileResponseData(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       email: json['email'] as String?,
@@ -34,8 +20,7 @@ ProfileResponseData _$ProfileResponseDataFromJson(Map<String, dynamic> json) =>
       occupation: json['pekerjaan'] as String?,
     );
 
-Map<String, dynamic> _$ProfileResponseDataToJson(
-        ProfileResponseData instance) =>
+Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

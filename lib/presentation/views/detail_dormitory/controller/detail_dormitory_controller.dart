@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/network/response/kost_response.dart';
+import 'package:kostrushapp/domain/repository/kost_repository.dart';
 import 'package:kostrushapp/presentation/views/detail_dormitory/argument/detail_dormitory_argument.dart';
 import 'package:kostrushapp/res/assets/image_asset_constant.dart';
-import 'package:kostrushapp/res/routes/app_routes.dart';
 
 import '../../../../base/base_controller.dart';
-import '../../../../base/base_state.dart';
+import '../../../../res/routes/app_routes.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../order_form/argument/order_form_argument.dart';
 
 class DetailDormitoryController
-    extends BaseController<DetailDormitoryArgument, NoState> {
+    extends BaseController<DetailDormitoryArgument, KostResponse> {
   late PageController pageController;
+
+  final _repository = Get.find<KostRepository>();
 
   RxInt currentIndex = 0.obs;
 
@@ -33,7 +37,30 @@ class DetailDormitoryController
 
   @override
   Future<void> onProcess() async {
-    // TODO: implement onProcess
+    emitLoading();
+    final result = await _repository.getKostById(arguments.id);
+
+    result.fold(
+      (exception) {
+        emitError(exception.message);
+        if (exception.response?.statusCode != 404) {
+          Get.dialog(AlertDialog(
+            title: Text("Error"),
+            content: Text(
+                HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          ));
+        }
+      },
+      (result) => emitSuccess(result),
+    );
   }
 
   @override
@@ -57,29 +84,9 @@ class DetailDormitoryController
   }
 
   void navigateToOrderForm() {
-    if (arguments.kost.id != null) {
-      Get.toNamed(AppRoutes.orderForm,
-          arguments: OrderFormArgument(
-            kostId: arguments.kost.id.toString(),
-            kostName: arguments.kost.name ?? "",
-            roomId: arguments.kost.id.toString(),
-            price: arguments.kost.startPrice ?? 0,
-          ));
-    } else {
-      Get.dialog(
-        AlertDialog(
-          title: const Text("Error"),
-          content: const Text("Kost id tidak boleh kosong"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        ),
-      );
-    }
+    Get.toNamed(AppRoutes.orderForm,
+        arguments: OrderFormArgument(
+          kostId: arguments.id,
+        ));
   }
 }

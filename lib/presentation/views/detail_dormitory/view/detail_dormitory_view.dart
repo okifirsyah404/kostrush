@@ -78,20 +78,20 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            controller.arguments.kost.name ?? "",
+            controller.state?.name ?? "",
             style: TypographyTheme.titleLarge,
           ),
           gap(16),
           Row(
             children: [
               TagChip.filled(
-                text: controller.arguments.kost.type ?? "",
+                text: controller.state?.type ?? "",
               ),
             ],
           ),
           gap(8),
           Text(
-            "Mulai Dari ${(controller.arguments.kost.startPrice ?? 0).toRupiah()} / Bulan",
+            "Mulai Dari ${(controller.state?.startPrice ?? 0).toRupiah()} / Bulan",
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
@@ -105,7 +105,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
               gap(8),
               Expanded(
                 child: Text(
-                  controller.arguments.kost.address ?? "",
+                  controller.state?.address ?? "",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -128,7 +128,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
-          Text(controller.arguments.kost.facilities ?? ""),
+          Text(controller.state?.facilities ?? ""),
         ],
       ),
     );
@@ -145,7 +145,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
             style: TypographyTheme.labelLarge,
           ),
           gap(8),
-          Text(controller.arguments.kost.rules ?? ""),
+          Text(controller.state?.rules ?? ""),
         ],
       ),
     );

@@ -1,16 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
 import 'package:kostrushapp/data/network/response/transaction_response.dart';
+import 'package:kostrushapp/domain/repository/transaction_repository.dart';
 
 import '../../../../../../base/base_controller.dart';
-import '../../../../../../domain/repository/main_repository.dart';
 import '../../../../../../res/routes/app_routes.dart';
+import '../../../../../../utils/handler/http_error_handler.dart';
 import '../../../../detail_transaction/argument/detail_transaction_argument.dart';
 
 class TransactionController
-    extends BaseController<NoArguments, TransactionResponse> {
-  final _repository = Get.find<MainRepository>();
+    extends BaseController<NoArguments, List<TransactionResponse>> {
+  final _repository = Get.find<TransactionRepository>();
 
   late ProfileModel profile;
 
@@ -27,25 +29,27 @@ class TransactionController
   @override
   Future<void> onProcess() async {
     emitLoading();
-    final result = await _repository.getTransaction();
-
-    final profileResult = await _repository.getProfile();
+    final result = await _repository.getTransactions();
 
     result.fold(
-      (error) {
-        emitError(error.toString());
+      (exception) {
+        emitError(exception.toString());
+        Get.dialog(AlertDialog(
+          title: Text("Error"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ));
       },
       (data) {
         emitSuccess(data);
-      },
-    );
-
-    profileResult.fold(
-      (error) {
-        emitError(error.toString());
-      },
-      (data) {
-        profile = data;
       },
     );
   }
@@ -56,12 +60,13 @@ class TransactionController
   }
 
   void navigateToDetailTransaction(int index) {
-    Get.toNamed(
-      AppRoutes.transactionDetail,
-      arguments: DetailTransactionArgument(
-        profile: profile,
-        transaction: state!.transaksis![index],
-      ),
-    );
+    if (state != null) {
+      Get.toNamed(
+        AppRoutes.transactionDetail,
+        arguments: DetailTransactionArgument(
+          id: state![index].id!,
+        ),
+      );
+    }
   }
 }

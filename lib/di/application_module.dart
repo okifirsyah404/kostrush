@@ -39,7 +39,7 @@ Future<void> initApplicationModule() async {
     () async => Dio()
 
         /// Ubah baseUrl sesuai dengan alamat server
-        .addBaseUrl("https://5ac4-118-99-121-210.ngrok-free.app")
+        .addBaseUrl("https://eb76-118-99-121-212.ngrok-free.app")
         .addInterceptor(
           PrettyDioLogger(
             request: true,

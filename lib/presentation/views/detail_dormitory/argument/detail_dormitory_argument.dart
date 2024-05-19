@@ -1,9 +1,7 @@
 import 'package:kostrushapp/base/base_argument.dart';
 
-import '../../../../data/network/response/kost_response.dart';
-
 class DetailDormitoryArgument extends BaseArguments {
-  final Kost kost;
+  final int id;
 
-  DetailDormitoryArgument(this.kost);
+  DetailDormitoryArgument(this.id);
 }

@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kostrushapp/domain/repository/main_repository.dart';
+import 'package:kostrushapp/data/network/response/kost_response.dart';
+import 'package:kostrushapp/domain/repository/transaction_repository.dart';
 import 'package:kostrushapp/presentation/views/duration_selector/argument/duration_selector_argument.dart';
 import 'package:kostrushapp/presentation/views/order_form/argument/order_form_argument.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
@@ -11,12 +12,19 @@ import 'package:kostrushapp/utils/extensions/date_time_ext.dart';
 import 'package:kostrushapp/utils/service/camera_gallery_service.dart';
 
 import '../../../../base/base_controller.dart';
-import '../../../../base/base_state.dart';
+import '../../../../data/enum/otp_purpose_enum.dart';
+import '../../../../domain/repository/kost_repository.dart';
+import '../../../../domain/repository/profile_repository.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../../components/focus_node/no_focus_node.dart';
+import '../../success/argument/success_argument.dart';
 
-class OrderFormController extends BaseController<OrderFormArgument, NoState>
+class OrderFormController
+    extends BaseController<OrderFormArgument, KostResponse>
     with CameraGalleryService {
-  final _repository = Get.find<MainRepository>();
+  final _repository = Get.find<TransactionRepository>();
+  final _profileRepository = Get.find<ProfileRepository>();
+  final _kostRepository = Get.find<KostRepository>();
 
   late TextEditingController nameController;
   late TextEditingController phoneController;
@@ -39,7 +47,7 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
     dateController = TextEditingController();
     durationController = TextEditingController();
     noFocusNode = NoFocusNode();
-    price.value = arguments.price;
+    price.value = 0;
   }
 
   @override
@@ -51,7 +59,7 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
   Future<void> onProcess() async {
     emitLoading();
 
-    final result = await _repository.getProfile();
+    final result = await _profileRepository.getProfile();
 
     result.fold(
       (error) {
@@ -61,7 +69,32 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
         nameController.text = data.name ?? "";
         phoneController.text = data.phoneNumber ?? "";
         occupationController.text = data.occupation ?? "";
-        emitSuccess(NoState());
+      },
+    );
+
+    final kostResult = await _kostRepository.getKostById(arguments.kostId);
+
+    kostResult.fold(
+      (exception) {
+        emitError(exception.message);
+        Get.dialog(AlertDialog(
+          title: Text("Error"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ));
+      },
+      (data) {
+        price.value = data.startPrice ?? 0;
+
+        emitSuccess(data);
       },
     );
   }
@@ -127,7 +160,7 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
 
       logger.d("Result: ${result.duration?.duration}");
 
-      price.value = arguments.price * selectedDuration.value!.value;
+      price.value = (state?.startPrice ?? 0) * selectedDuration.value!.value;
     }
   }
 
@@ -186,9 +219,8 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
       return;
     }
 
-    final result = await _repository.addTransaction(
+    final result = await _repository.createTransaction(
       kostId: arguments.kostId,
-      roomId: arguments.roomId,
       price: price.value,
       date: selectedDate.value!,
       duration: selectedDuration.value!.value,
@@ -196,25 +228,37 @@ class OrderFormController extends BaseController<OrderFormArgument, NoState>
     );
 
     result.fold(
-      (error) {
-        Get.dialog(
-          AlertDialog(
-            title: const Text("Error"),
-            content: Text(error.message.toString()),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text("OK"),
-              ),
-            ],
-          ),
-        );
+      (exception) {
+        Get.dialog(AlertDialog(
+          title: Text("Error"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        ));
       },
       (data) {
-        emitSuccess(NoState());
+        navigateToSuccess();
       },
+    );
+  }
+
+  void navigateToSuccess() {
+    Get.toNamed(
+      AppRoutes.success,
+      arguments: SuccessArgument(
+        context: OtpPurposeEnum.transaction,
+        title: "Transaksi Berhasil",
+        description:
+            "Transaksi Anda berhasil dilakukan. Anda akan diarahkan ke halaman utama dalam 3 detik.",
+        buttonText: "Kembali ke Beranda",
+      ),
     );
   }
 }

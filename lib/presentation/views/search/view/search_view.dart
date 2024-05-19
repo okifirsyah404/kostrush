@@ -21,7 +21,7 @@ class SearchView extends BaseView<SearchViewController> {
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: (controller.state?.kosts ?? []).isNotEmpty
+      child: (controller.state ?? []).isNotEmpty
           ? GridView.builder(
               padding: const EdgeInsets.all(16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -30,9 +30,9 @@ class SearchView extends BaseView<SearchViewController> {
                 crossAxisSpacing: 16,
                 mainAxisExtent: 240,
               ),
-              itemCount: controller.state?.kosts?.length ?? 0,
+              itemCount: controller.state?.length ?? 0,
               itemBuilder: (context, index) {
-                final kost = controller.state?.kosts?[index];
+                final kost = controller.state?[index];
 
                 return Center(
                   child: DormCard(
@@ -41,7 +41,7 @@ class SearchView extends BaseView<SearchViewController> {
                     name: kost?.name ?? "",
                     address: kost?.address ?? "",
                     onTap: () {
-                      controller.navigateToDetailDormitory(kost);
+                      controller.navigateToDetailDormitory(kost?.id);
                     },
                   ),
                 );

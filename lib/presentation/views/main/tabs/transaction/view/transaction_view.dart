@@ -23,18 +23,16 @@ class TransactionView extends BaseView<TransactionController> {
       onRefresh: onRefresh,
       child: ListView.separated(
         padding: EdgeInsets.all(16),
-        itemCount: controller.state?.transaksis?.length ?? 0,
+        itemCount: controller.state?.length ?? 0,
         separatorBuilder: (context, index) => gap(8),
         itemBuilder: (context, index) {
-          final transaksi = controller.state?.transaksis?[index];
-
-          logger.d("transaksi: ${transaksi?.namaKost}");
+          final transaksi = controller.state?[index];
 
           return TransactionCard(
-            name: transaksi?.namaKost ?? "",
-            address: transaksi?.namaKamar ?? "",
-            price: transaksi?.biaya ?? 0,
-            status: transaksi?.statusTransaksi ?? TransactionStatusEnum.pending,
+            name: transaksi?.kost?.name ?? "",
+            address: transaksi?.roomName ?? "",
+            price: transaksi?.total ?? 0,
+            status: transaksi?.status ?? TransactionStatusEnum.pending,
             onTap: () {
               controller.navigateToDetailTransaction(index);
             },

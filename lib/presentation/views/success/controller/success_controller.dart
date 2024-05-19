@@ -65,6 +65,12 @@ class SuccessController extends BaseController<SuccessArgument, NoState> {
         Get.back();
         break;
 
+      case OtpPurposeEnum.transaction:
+        Get.back();
+        Get.back();
+        Get.back();
+        break;
+
       default:
         break;
     }

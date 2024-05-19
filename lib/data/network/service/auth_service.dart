@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:retrofit/http.dart';
+import 'package:kostrushapp/base/base_response.dart';
+import 'package:kostrushapp/data/network/request/sign_in_request.dart';
+import 'package:kostrushapp/data/network/request/sign_up_request.dart';
+import 'package:kostrushapp/data/network/response/profile_response.dart';
+import 'package:retrofit/retrofit.dart';
 
 import '../response/sign_in_response.dart';
 
@@ -9,26 +13,21 @@ part 'auth_service.g.dart';
 abstract class AuthService {
   factory AuthService(Dio dio) = _AuthService;
 
-  @POST('/api/apilogin')
-  Future<SignInResponse> signIn(
-    @Field() String email,
-    @Field() String password,
-  );
+  @POST('/api/login')
+  Future<BaseResponse<SignInResponse>> signIn({
+    @CancelRequest() CancelToken? cancelToken,
+    @Body() SignInRequest? request,
+  });
 
-  @POST('/api/apilogout')
-  Future<void> signOut(
-    @Header('Authorization') String token,
-  );
+  @DELETE('/api/logout')
+  Future<BaseResponse> signOut({
+    @CancelRequest() required CancelToken cancelToken,
+    @Header('Authorization') required String token,
+  });
 
-  @POST('/api/apiregister')
-  Future<void> signUp({
-    @Field() required String name,
-    @Field() required String email,
-    @Field() required String password,
-    @Field("alamat") required String address,
-    @Field("no_hp") required String phoneNumber,
-    @Field("pekerjaan") required String occupation,
-    @Field("tgl_lahir") required String dateBirth,
-    @Field("jenis_kelamin") required String gender,
+  @POST('/api/register')
+  Future<BaseResponse<ProfileResponse>> signUp({
+    @CancelRequest() required CancelToken? cancelToken,
+    @Body() required SignUpRequest request,
   });
 }

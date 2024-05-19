@@ -4,6 +4,7 @@ import 'package:kostrushapp/base/base_argument.dart';
 import 'package:kostrushapp/base/base_state.dart';
 import 'package:kostrushapp/domain/repository/auth_repository.dart';
 import 'package:kostrushapp/res/routes/app_routes.dart';
+import 'package:kostrushapp/utils/handler/http_error_handler.dart';
 
 import '../../../../../base/base_controller.dart';
 
@@ -47,7 +48,8 @@ class SignInController extends BaseController<NoArguments, NoState> {
       if (exception.response?.statusCode == 401) {
         Get.dialog(AlertDialog(
           title: Text("Error"),
-          content: Text("Email atau password salah"),
+          content: Text(
+              HttpErrorHandler.parseErrorResponse(exception.response?.data)),
           actions: [
             TextButton(
               onPressed: () {

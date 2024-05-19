@@ -4,4 +4,5 @@ enum OtpPurposeEnum {
   signIn,
   forgotPassword,
   changePassword,
+  transaction,
 }

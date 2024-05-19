@@ -5,22 +5,6 @@ part 'profile_response.g.dart';
 
 @JsonSerializable()
 class ProfileResponse {
-  final String? message;
-  final ProfileResponseData? data;
-
-  ProfileResponse({
-    this.message,
-    this.data,
-  });
-
-  factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
-      _$ProfileResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
-}
-
-@JsonSerializable()
-class ProfileResponseData {
   final int? id;
   final String? name;
   final String? email;
@@ -35,7 +19,7 @@ class ProfileResponseData {
   @JsonKey(name: 'pekerjaan')
   final String? occupation;
 
-  ProfileResponseData({
+  ProfileResponse({
     this.id,
     this.name,
     this.email,
@@ -46,8 +30,8 @@ class ProfileResponseData {
     this.occupation,
   });
 
-  factory ProfileResponseData.fromJson(Map<String, dynamic> json) =>
-      _$ProfileResponseDataFromJson(json);
+  factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProfileResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProfileResponseDataToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
 }

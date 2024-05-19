@@ -19,103 +19,110 @@ class _AuthService implements AuthService {
   String? baseUrl;
 
   @override
-  Future<SignInResponse> signIn(
-    String email,
-    String password,
-  ) async {
+  Future<BaseResponse<SignInResponse>> signIn({
+    CancelToken? cancelToken,
+    SignInRequest? request,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = {
-      'email': email,
-      'password': password,
-    };
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SignInResponse>(Options(
+    final _data = <String, dynamic>{};
+    _data.addAll(request?.toJson() ?? <String, dynamic>{});
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse<SignInResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/apilogin',
+              '/api/login',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SignInResponse.fromJson(_result.data!);
+    final value = BaseResponse<SignInResponse>.fromJson(
+      _result.data!,
+      (json) => SignInResponse.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
   @override
-  Future<void> signOut(String token) async {
+  Future<BaseResponse<dynamic>> signOut({
+    required CancelToken cancelToken,
+    required String token,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'POST',
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse<dynamic>>(Options(
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/api/apilogout',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              '/api/logout',
+              queryParameters: queryParameters,
+              data: _data,
+              cancelToken: cancelToken,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponse<dynamic>.fromJson(
+      _result.data!,
+      (json) => json as dynamic,
+    );
+    return value;
   }
 
   @override
-  Future<void> signUp({
-    required String name,
-    required String email,
-    required String password,
-    required String address,
-    required String phoneNumber,
-    required String occupation,
-    required String dateBirth,
-    required String gender,
+  Future<BaseResponse<ProfileResponse>> signUp({
+    CancelToken? cancelToken,
+    required SignUpRequest request,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = {
-      'name': name,
-      'email': email,
-      'password': password,
-      'alamat': address,
-      'no_hp': phoneNumber,
-      'pekerjaan': occupation,
-      'tgl_lahir': dateBirth,
-      'jenis_kelamin': gender,
-    };
-    await _dio.fetch<void>(_setStreamType<void>(Options(
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponse<ProfileResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/api/apiregister',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              '/api/register',
+              queryParameters: queryParameters,
+              data: _data,
+              cancelToken: cancelToken,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponse<ProfileResponse>.fromJson(
+      _result.data!,
+      (json) => ProfileResponse.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

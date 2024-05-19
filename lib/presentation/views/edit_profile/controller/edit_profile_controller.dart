@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
-import 'package:kostrushapp/data/network/response/profile_response.dart';
+import 'package:kostrushapp/domain/repository/profile_repository.dart';
 
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
-import '../../../../domain/repository/main_repository.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 
 class EditProfileController extends BaseController<NoArguments, ProfileModel> {
-  final _mainRepository = Get.find<MainRepository>();
+  final _repository = Get.find<ProfileRepository>();
 
   late TextEditingController nameController;
   late TextEditingController occupationController;
@@ -37,7 +37,7 @@ class EditProfileController extends BaseController<NoArguments, ProfileModel> {
   Future<void> onProcess() async {
     emitLoading();
 
-    final data = await _mainRepository.getProfile();
+    final data = await _repository.getProfile();
 
     data.fold((exception) {
       emitError(exception.toString());
@@ -65,21 +65,20 @@ class EditProfileController extends BaseController<NoArguments, ProfileModel> {
   }
 
   Future<void> updateProfile() async {
-    final data = await _mainRepository.editProfile(
-      ProfileResponseData(
-        name: nameController.text,
-        occupation: occupationController.text,
-        address: addressController.text,
-        phoneNumber: phoneController.text,
-        email: emailController.text,
-      ),
+    final data = await _repository.updateProfile(
+      name: nameController.text,
+      occupation: occupationController.text,
+      address: addressController.text,
+      phoneNumber: phoneController.text,
+      email: emailController.text,
     );
 
     data.fold((exception) {
       emitError(exception.toString());
       Get.dialog(AlertDialog(
         title: Text("Error"),
-        content: Text("Something went wrong. Please try again later."),
+        content:
+            Text(HttpErrorHandler.parseErrorResponse(exception.response?.data)),
         actions: [
           TextButton(
             onPressed: () {

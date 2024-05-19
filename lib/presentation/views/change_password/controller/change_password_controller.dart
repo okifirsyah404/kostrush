@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/network/response/profile_response.dart';
+import 'package:kostrushapp/domain/repository/profile_repository.dart';
 import 'package:kostrushapp/presentation/views/change_password/argument/change_password_argument.dart';
 
 import '../../../../base/base_controller.dart';
-import '../../../../base/base_state.dart';
-import '../../../../domain/repository/main_repository.dart';
 import '../../../../res/routes/app_routes.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../success/argument/success_argument.dart';
 
 class ChangePasswordController
-    extends BaseController<ChangePasswordArgument, NoState> {
-  final _repository = Get.find<MainRepository>();
+    extends BaseController<ChangePasswordArgument, ProfileResponse> {
+  final _repository = Get.find<ProfileRepository>();
 
-  late TextEditingController oldPasswordController;
   late TextEditingController newPasswordController;
+  late TextEditingController newRePasswordController;
 
   @override
   void initComponent() {
-    oldPasswordController = TextEditingController();
+    newRePasswordController = TextEditingController();
     newPasswordController = TextEditingController();
   }
 
@@ -33,66 +34,63 @@ class ChangePasswordController
 
   @override
   void disposeComponent() {
-    oldPasswordController.dispose();
+    newRePasswordController.dispose();
     newPasswordController.dispose();
   }
 
   void changePassword() async {
-    if (oldPasswordController.text.isEmpty) {
-      Get.dialog(
-        AlertDialog(
-          title: Text("Error"),
-          content: Text("Kata sandi lama tidak boleh kosong"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        ),
-      );
-
+    if (newPasswordController.text.isEmpty ||
+        newRePasswordController.text.isEmpty) {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Password tidak boleh kosong"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
       return;
     }
 
-    if (newPasswordController.text.isEmpty) {
-      Get.dialog(
-        AlertDialog(
-          title: Text("Error"),
-          content: Text("Kata sandi baru tidak boleh kosong"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        ),
-      );
+    if (newPasswordController.text != newRePasswordController.text) {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text("Password tidak sama"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
       return;
     }
 
-    final result = await _repository.changePassword(newPasswordController.text);
+    final result = await _repository.changePassword(
+      password: newPasswordController.text,
+    );
 
     result.fold((exception) {
       emitError(exception.toString());
-      Get.dialog(
-        AlertDialog(
-          title: Text("Error"),
-          content: Text("Something went wrong. Please try again later."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        ),
-      );
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content:
+            Text(HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ));
     }, (response) {
       Get.toNamed(
         AppRoutes.success,

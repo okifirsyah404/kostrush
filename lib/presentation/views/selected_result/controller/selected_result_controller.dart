@@ -6,10 +6,11 @@ import 'package:kostrushapp/presentation/views/selected_result/argument/selected
 import '../../../../base/base_controller.dart';
 import '../../../../domain/repository/main_repository.dart';
 import '../../../../res/routes/app_routes.dart';
+import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
 class SelectedResultController
-    extends BaseController<SelectedResultArgument, KostResponse> {
+    extends BaseController<SelectedResultArgument, List<KostResponse>> {
   final _repository = Get.find<MainRepository>();
 
   @override
@@ -33,7 +34,8 @@ class SelectedResultController
         if (exception.response?.statusCode != 404) {
           Get.dialog(AlertDialog(
             title: Text("Error"),
-            content: Text("Terjadi kesalahan saat mengambil data dari server"),
+            content: Text(
+                HttpErrorHandler.parseErrorResponse(exception.response?.data)),
             actions: [
               TextButton(
                 onPressed: () {
@@ -54,10 +56,10 @@ class SelectedResultController
     // TODO: implement disposeComponent
   }
 
-  void navigateToDetailDormitory(Kost? kost) {
-    if (kost != null) {
+  void navigateToDetailDormitory(int? kostId) {
+    if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
-          arguments: DetailDormitoryArgument(kost));
+          arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
         title: Text("Error"),
