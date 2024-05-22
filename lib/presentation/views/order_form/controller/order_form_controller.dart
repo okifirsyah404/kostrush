@@ -221,6 +221,7 @@ class OrderFormController
 
     final result = await _repository.createTransaction(
       kostId: arguments.kostId,
+      roomId: arguments.roomId,
       price: price.value,
       date: selectedDate.value!,
       duration: selectedDuration.value!.value,

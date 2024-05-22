@@ -41,7 +41,7 @@ class DetailDormitoryController
     final result = await _repository.getKostById(arguments.id);
 
     result.fold(
-      (exception) {
+          (exception) {
         emitError(exception.message);
         if (exception.response?.statusCode != 404) {
           Get.dialog(AlertDialog(
@@ -59,7 +59,7 @@ class DetailDormitoryController
           ));
         }
       },
-      (result) => emitSuccess(result),
+          (result) => emitSuccess(result),
     );
   }
 
@@ -87,6 +87,7 @@ class DetailDormitoryController
     Get.toNamed(AppRoutes.orderForm,
         arguments: OrderFormArgument(
           kostId: arguments.id,
+          roomId: state?.rooms?[0].id ?? 0,
         ));
   }
 }

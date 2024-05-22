@@ -52,6 +52,7 @@ class TransactionRepository {
 
   Future<Either<DioException, TransactionResponse>> createTransaction({
     required int kostId,
+    required int roomId,
     required int price,
     required DateTime date,
     required int duration,
@@ -65,14 +66,14 @@ class TransactionRepository {
         token: "Bearer $token",
         request: TransactionRequest(
           kostId: kostId,
-          roomId: 7,
+          roomId: roomId,
           total: price,
           checkIn: date,
           duration: duration,
         ),
       );
 
-      final responseUpload = await _service.uploadDocument(
+      await _service.uploadDocument(
         cancelToken: _cancelToken,
         token: "Bearer $token",
         file: image,

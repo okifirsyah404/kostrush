@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:kostrushapp/data/network/response/room_response.dart';
 
 part 'kost_response.g.dart';
 
@@ -22,6 +23,8 @@ class KostResponse {
   final int? startPrice;
   @JsonKey(name: "harga_tertinggi")
   final int? endPrice;
+  @JsonKey(name: 'kamar')
+  final List<RoomResponse>? rooms;
 
   KostResponse({
     this.id,
@@ -33,6 +36,7 @@ class KostResponse {
     this.type,
     this.startPrice,
     this.endPrice,
+    this.rooms,
   });
 
   factory KostResponse.fromJson(Map<String, dynamic> json) =>
