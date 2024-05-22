@@ -178,20 +178,21 @@ class OrderFormView extends BaseView<OrderFormController>
           gap(16),
           Row(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Harga Sewa",
-                    style: TypographyTheme.bodyMedium,
-                  ),
-                  Text(
-                    "Pemabayaran diakukan secara tunai",
-                    style: TypographyTheme.bodySmall,
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Harga Sewa",
+                      style: TypographyTheme.bodyMedium,
+                    ),
+                    Text(
+                      "Pemabayaran diakukan secara tunai",
+                      style: TypographyTheme.bodySmall,
+                    )
+                  ],
+                ),
               ),
-              const Spacer(),
               Text(
                 controller.price.value.toRupiah(),
                 style: TypographyTheme.labelMedium,

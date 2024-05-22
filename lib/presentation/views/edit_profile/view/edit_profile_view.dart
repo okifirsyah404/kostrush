@@ -21,7 +21,7 @@ class EditProfileView extends BaseView<EditProfileController> {
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),

@@ -22,7 +22,7 @@ class DashboardView extends BaseView<DashboardController> {
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: CustomScrollView(
         scrollDirection: Axis.vertical,
         slivers: [
@@ -140,7 +140,7 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           gap(8),
           Container(
-            height: 240,
+            height: 260,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -199,7 +199,7 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           gap(8),
           Container(
-            height: 240,
+            height: 260,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,

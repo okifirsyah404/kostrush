@@ -88,23 +88,25 @@ class SignUpView extends BaseView<SignUpController> {
             },
           ),
         ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Dengan ini Anda telah menyetujui",
-            ),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                "Kebijakan & Privasi Layanan Kami.",
-                style: TypographyTheme.labelMedium.copyWith(
-                  color: Colors.blue,
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Dengan ini Anda telah menyetujui",
+              ),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  "Kebijakan & Privasi Layanan Kami.",
+                  style: TypographyTheme.labelMedium.copyWith(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
