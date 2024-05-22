@@ -30,7 +30,7 @@ class TransactionView extends BaseView<TransactionController> {
 
           return TransactionCard(
             name: transaksi?.kost?.name ?? "",
-            address: transaksi?.roomName ?? "",
+            address: transaksi?.kost?.address ?? "",
             price: transaksi?.total ?? 0,
             status: transaksi?.status ?? TransactionStatusEnum.pending,
             onTap: () {
