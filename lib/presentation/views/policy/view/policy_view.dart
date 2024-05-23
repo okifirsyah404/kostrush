@@ -5,6 +5,7 @@ import '../../../../base/base_view.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../controller/policy_controller.dart';
 
+/// Widget untuk tampilan kebijakan dan privasi.
 class PolicyView extends BaseView<PolicyController> {
   const PolicyView({super.key});
 

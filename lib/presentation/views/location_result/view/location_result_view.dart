@@ -5,6 +5,7 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/card/dorm_card.dart';
 import '../controller/location_result_controller.dart';
 
+/// Widget untuk menampilkan hasil pencarian lokasi.
 class LocationResultView extends BaseView<LocationResultController> {
   const LocationResultView({super.key});
 

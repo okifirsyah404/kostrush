@@ -9,6 +9,8 @@ import '../../../components/input/main_text_input.dart';
 import '../../../themes/typography_theme.dart';
 import '../controller/sign_up_controller.dart';
 
+/// Kelas SignUpView adalah kelas yang mewakili tampilan untuk proses pendaftaran.
+/// Kelas ini merupakan turunan dari kelas BaseView dan menggunakan SignUpController sebagai controller.
 class SignUpView extends BaseView<SignUpController> {
   const SignUpView({super.key});
 
@@ -19,6 +21,10 @@ class SignUpView extends BaseView<SignUpController> {
     );
   }
 
+  /// Widget untuk menampilkan body pada tampilan sign up.
+  ///
+  /// [context] Konteks dari widget ini.
+  /// [state] State dari widget ini.
   @override
   Widget body(BuildContext context, state) {
     return SingleChildScrollView(
@@ -35,6 +41,7 @@ class SignUpView extends BaseView<SignUpController> {
               label: "Lanjut",
               buttonWidth: ButtonWidth.full,
               onTap: () {
+                /// Navigasi ke halaman pendaftaran akun.
                 controller.navigateToAccountSignUp();
               },
             ),
@@ -44,6 +51,7 @@ class SignUpView extends BaseView<SignUpController> {
     );
   }
 
+  /// Widget untuk membangun form.
   Widget _formBuilder() {
     return Column(
       children: [
@@ -77,6 +85,7 @@ class SignUpView extends BaseView<SignUpController> {
     );
   }
 
+  /// Widget untuk membangun tampilan persetujuan.
   Widget _agreementBuilder() {
     return Row(
       children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kostrushapp/res/assets/image_asset_constant.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../base/base_view.dart';
@@ -7,6 +8,7 @@ import '../../../components/image_view/circle_image.dart';
 import '../../../components/input/main_text_input.dart';
 import '../controller/detail_profile_controller.dart';
 
+/// Widget untuk tampilan detail profil.
 class DetailProfileView extends BaseView<DetailProfileController> {
   const DetailProfileView({super.key});
 
@@ -30,12 +32,13 @@ class DetailProfileView extends BaseView<DetailProfileController> {
     );
   }
 
+  /// Widget untuk membangun form.
   Widget _formBuilder() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CircleImage.network(
-          imageEndpoint: "",
+        CircleImage.asset(
+          imageAsset: ImageAssetConstant.blankProfile,
           radius: 50,
         ),
         gap(16),

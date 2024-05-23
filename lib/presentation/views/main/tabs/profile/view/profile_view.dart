@@ -5,9 +5,11 @@ import 'package:kostrushapp/presentation/themes/typography_theme.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../../../base/base_view.dart';
+import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../../components/appbar/default_appbar.dart';
 import '../controller/profile_controller.dart';
 
+/// Widget untuk tampilan profil pengguna.
 class ProfileView extends BaseView<ProfileController> {
   const ProfileView({super.key});
 
@@ -46,6 +48,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk membangun tampilan profil pengguna.
   Widget _profileBuilder() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -54,7 +57,10 @@ class ProfileView extends BaseView<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleImage.network(imageEndpoint: "", radius: 50),
+            CircleImage.asset(
+              imageAsset: ImageAssetConstant.blankProfile,
+              radius: 50,
+            ),
             gap(8),
             Text(
               controller.state?.name ?? "",
@@ -70,6 +76,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk pengaturan profil pengguna.
   Widget _profileSetting() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -106,6 +113,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk pengaturan lainnya.
   Widget _otherSetting() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -142,6 +150,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk item pengaturan profil.
   Widget _profileSettingItem({
     required String title,
     required Function() onTap,

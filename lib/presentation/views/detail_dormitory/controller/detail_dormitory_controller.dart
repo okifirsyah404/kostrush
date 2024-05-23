@@ -10,8 +10,8 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../order_form/argument/order_form_argument.dart';
 
-class DetailDormitoryController
-    extends BaseController<DetailDormitoryArgument, KostResponse> {
+/// Controller untuk halaman detail asrama.
+class DetailDormitoryController extends BaseController<DetailDormitoryArgument, KostResponse> {
   late PageController pageController;
 
   final _repository = Get.find<KostRepository>();
@@ -41,7 +41,7 @@ class DetailDormitoryController
     final result = await _repository.getKostById(arguments.id);
 
     result.fold(
-          (exception) {
+      (exception) {
         emitError(exception.message);
         if (exception.response?.statusCode != 404) {
           Get.dialog(AlertDialog(
@@ -59,7 +59,7 @@ class DetailDormitoryController
           ));
         }
       },
-          (result) => emitSuccess(result),
+      (result) => emitSuccess(result),
     );
   }
 
@@ -69,20 +69,24 @@ class DetailDormitoryController
     currentIndex.close();
   }
 
+  /// Callback yang dipanggil ketika halaman berubah.
   void onPageChanged(int index) {
     currentIndex.value = index;
   }
 
+  /// Pindah ke halaman berikutnya.
   void nextPage() {
     pageController.nextPage(
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
+  /// Pindah ke halaman sebelumnya.
   void previousPage() {
     pageController.previousPage(
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
+  /// Navigasi ke halaman formulir pemesanan.
   void navigateToOrderForm() {
     Get.toNamed(AppRoutes.orderForm,
         arguments: OrderFormArgument(

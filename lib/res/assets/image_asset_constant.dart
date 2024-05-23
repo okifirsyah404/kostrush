@@ -31,4 +31,5 @@ abstract class ImageAssetConstant {
   static const String successAlt = 'assets/images/berhasil2.png';
   static const String profilePlaceholder =
       'assets/images/profile_placeholder.png';
+  static const String blankProfile = 'assets/images/blank_profile.png';
 }
