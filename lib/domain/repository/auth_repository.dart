@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:kostrushapp/base/base_response.dart';
+import 'package:kostrushapp/data/dto/profile_dto.dart';
 import 'package:kostrushapp/data/enum/gender_enum.dart';
 import 'package:kostrushapp/data/local/share_pref/storage_preference.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
@@ -117,7 +118,7 @@ class AuthRepository {
   ///
   /// Exception:
   /// - [DioException]: Exception yang terjadi jika terjadi kesalahan saat melakukan permintaan ke server.
-  Future<Either<DioException, ProfileResponse>> signUp({
+  Future<Either<DioException, ProfileDto>> signUp({
     required String name,
     required String email,
     required String password,
@@ -142,7 +143,7 @@ class AuthRepository {
       );
 
       /// Mengembalikan response dari server
-      return Right(response.data!);
+      return Right(ProfileDto.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);

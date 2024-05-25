@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/kost_repository.dart';
 import 'package:kostrushapp/presentation/views/location_result/argument/location_result_argument.dart';
@@ -11,7 +12,7 @@ import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
 /// Controller untuk tampilan hasil lokasi.
 class LocationResultController
-    extends BaseController<LocationResultArgument, List<KostResponse>> {
+    extends BaseController<LocationResultArgument, List<KostDto>> {
   final _repository = Get.find<KostRepository>();
 
   @override

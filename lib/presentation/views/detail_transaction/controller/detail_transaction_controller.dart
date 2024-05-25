@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/transaction_dto.dart';
 import 'package:kostrushapp/data/network/response/transaction_response.dart';
 import 'package:kostrushapp/presentation/views/detail_transaction/argument/detail_transaction_argument.dart';
 import 'package:kostrushapp/utils/extensions/date_time_ext.dart';
@@ -10,7 +11,7 @@ import '../../../../utils/handler/http_error_handler.dart';
 import '../../../components/focus_node/no_focus_node.dart';
 
 /// Kelas controller untuk halaman detail transaksi.
-class DetailTransactionController extends BaseController<DetailTransactionArgument, TransactionResponse> {
+class DetailTransactionController extends BaseController<DetailTransactionArgument, TransactionDto> {
   final _repository = Get.find<TransactionRepository>();
 
   late TextEditingController nameController;

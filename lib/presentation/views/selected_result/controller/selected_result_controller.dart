@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/presentation/views/selected_result/argument/selected_result_argument.dart';
 
@@ -13,7 +14,7 @@ import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 /// Kelas ini mewarisi `BaseController` dan menggunakan `SelectedResultArgument` sebagai argumen masukan
 /// dan `List<KostResponse>` sebagai hasil keluaran.
 class SelectedResultController
-    extends BaseController<SelectedResultArgument, List<KostResponse>> {
+    extends BaseController<SelectedResultArgument, List<KostDto>> {
   /// Repository utama.
   final _repository = Get.find<MainRepository>();
 

@@ -36,9 +36,9 @@ class LocationResultView extends BaseView<LocationResultController> {
                 return Center(
                   child: DormCard(
                     type: kost?.type ?? "",
-                    price: kost?.startPrice ?? 0,
-                    name: kost?.name ?? "",
-                    address: kost?.address ?? "",
+                    price: kost!.startPrice ?? 0,
+                    name: kost.name ?? "",
+                    address: kost.address ?? "",
                     onTap: () {
                       controller.navigateToDetailDormitory(kost?.id);
                     },

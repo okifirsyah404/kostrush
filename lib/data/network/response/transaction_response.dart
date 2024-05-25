@@ -11,11 +11,11 @@ part 'transaction_response.g.dart';
 class TransactionResponse {
   /// ID transaksi.
   @JsonKey(name: 'id_transaksi')
-  final int? id;
+  final dynamic id;
 
   /// ID kamar.
   @JsonKey(name: 'id_kamar')
-  final int? roomId;
+  final dynamic roomId;
 
   /// Nama kamar.
   @JsonKey(name: 'nama_kamar')
@@ -23,7 +23,7 @@ class TransactionResponse {
 
   /// Biaya transaksi.
   @JsonKey(name: 'biaya')
-  final int? total;
+  final String? total;
 
   /// Tanggal check-in.
   @JsonKey(name: 'tanggal_masuk')
@@ -35,7 +35,7 @@ class TransactionResponse {
 
   /// Durasi transaksi.
   @JsonKey(name: 'durasi')
-  final int? duration;
+  final dynamic duration;
 
   /// Status transaksi.
   @JsonKey(name: 'status_transaksi')

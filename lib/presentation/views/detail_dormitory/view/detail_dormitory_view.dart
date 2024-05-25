@@ -5,6 +5,7 @@ import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 import 'package:kostrushapp/utils/extensions/int_ext.dart';
+import 'package:kostrushapp/utils/extensions/string_ext.dart';
 import 'package:kostrushapp/utils/mixins/custom_sliver_mixin.dart';
 
 import '../../../../base/base_view.dart';

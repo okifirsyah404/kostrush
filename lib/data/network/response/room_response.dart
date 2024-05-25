@@ -7,7 +7,7 @@ part 'room_response.g.dart';
 class RoomResponse {
   /// ID kamar.
   @JsonKey(name: 'id_kamar')
-  final int? id;
+  final dynamic id;
 
   /// Nama kamar.
   @JsonKey(name: 'nama_kamar')
@@ -15,7 +15,7 @@ class RoomResponse {
 
   /// Harga kamar.
   @JsonKey(name: 'harga')
-  final int? price;
+  final dynamic price;
 
   /// Fasilitas kamar.
   @JsonKey(name: 'fasilitas')

@@ -1,13 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:kostrushapp/data/local/dao/profile_dao.dart';
 import 'package:kostrushapp/data/local/share_pref/storage_preference.dart';
 import 'package:kostrushapp/data/model/dashboard_model.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
 import 'package:kostrushapp/data/network/service/kost_service.dart';
 import 'package:kostrushapp/data/network/service/profile_service.dart';
 import 'package:kostrushapp/res/local_data/storage_constant.dart';
 import 'package:kostrushapp/utils/extensions/enum_ext.dart';
+import 'package:logger/logger.dart';
 
 import '../../data/network/response/kost_response.dart';
 
@@ -19,6 +22,9 @@ class MainRepository {
     this._storage,
     this._profileDao,
   );
+
+
+  final logger = Get.find<Logger>();
 
   final ProfileService _profileService;
   final KostService _kostService;
@@ -86,20 +92,19 @@ class MainRepository {
     try {
       /// Mengambil data kost yang direkomendasikan dari server
       final recommendedKost =
-          await _kostService.getKost(cancelToken: _cancelToken).catchError((e) {
-        throw Exception(e);
-      });
+          await _kostService.getKost(cancelToken: _cancelToken);
 
       /// Mengambil data kost yang murah dari server
       final cheapKost =
-          await _kostService.getKost(cancelToken: _cancelToken).catchError((e) {
-        throw Exception(e);
-      });
+          await _kostService.getKost(cancelToken: _cancelToken);
+
+      final recommendedKostData = recommendedKost.data?.map((e) => KostDto.fromResponse(e)).toList();
+      final cheapKostData = cheapKost.data?.map((e) => KostDto.fromResponse(e)).toList();
 
       /// Mengembalikan objek [DashboardModel] jika permintaan berhasil
       return Right(DashboardModel(
-        recommendedKost: recommendedKost.data ?? [],
-        cheapKost: cheapKost.data ?? [],
+        recommendedKost: recommendedKostData ?? [],
+        cheapKost: cheapKostData ?? [],
       ));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
@@ -112,13 +117,15 @@ class MainRepository {
   /// Fungsi ini akan mengirim permintaan ke server untuk mendapatkan daftar kost yang direkomendasikan.
   /// Jika permintaan berhasil, fungsi akan mengembalikan daftar kost dalam bentuk `List<KostResponse>`.
   /// Jika terjadi kesalahan saat mengirim permintaan, fungsi akan mengembalikan `DioException`.
-  Future<Either<DioException, List<KostResponse>>> getRecommendedKost() async {
+  Future<Either<DioException, List<KostDto>>> getRecommendedKost() async {
     try {
       /// Mengambil data kost dari server
       final response = await _kostService.getKost(cancelToken: _cancelToken);
 
+      final data = response.data?.map((e) => KostDto.fromResponse(e)).toList();
+
       /// Mengembalikan daftar kost jika permintaan berhasil
-      return Right(response.data!);
+      return Right(data!);
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -129,12 +136,15 @@ class MainRepository {
   ///
   /// Mengembalikan daftar kost dengan harga murah jika permintaan berhasil.
   /// Jika terjadi kesalahan, mengembalikan [DioException].
-  Future<Either<DioException, List<KostResponse>>> getCheapKost() async {
+  Future<Either<DioException, List<KostDto>>> getCheapKost() async {
     try {
       final response = await _kostService.getKost(
         cancelToken: _cancelToken,
       );
-      return Right(response.data!);
+
+      final data = response.data?.map((e) => KostDto.fromResponse(e)).toList();
+
+      return Right(data!);
     } on DioException catch (e) {
       return Left(e);
     }

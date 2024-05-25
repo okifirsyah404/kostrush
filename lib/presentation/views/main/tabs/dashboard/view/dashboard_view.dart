@@ -50,9 +50,9 @@ class DashboardView extends BaseView<DashboardController> {
           SliverToBoxAdapter(
             child: _popularBuilder(),
           ),
-          SliverToBoxAdapter(
-            child: _recommendedBuilder(),
-          ),
+          // SliverToBoxAdapter(
+          //   child: _recommendedBuilder(),
+          // ),
         ],
       ),
     );
@@ -71,7 +71,7 @@ class DashboardView extends BaseView<DashboardController> {
           ),
           gap(8),
           ExpandChild(
-            collapsedVisibilityFactor: 0.25,
+            collapsedVisibilityFactor: 0.70,
             indicatorBuilder: (context, Function() onExpand, isExpand) {
               return InkWell(
                 onTap: onExpand,
@@ -156,7 +156,7 @@ class DashboardView extends BaseView<DashboardController> {
 
                 return DormCard(
                   type: kost?.type ?? "",
-                  price: kost?.startPrice ?? 0,
+                  price: kost!.startPrice ?? 0,
                   name: kost?.name ?? "",
                   address: kost?.address ?? "",
                   onTap: () {
@@ -217,7 +217,7 @@ class DashboardView extends BaseView<DashboardController> {
 
                 return DormCard(
                   type: kost?.type ?? "",
-                  price: kost?.startPrice ?? 0,
+                  price: kost!.startPrice ?? 0,
                   name: kost?.name ?? "",
                   address: kost?.address ?? "",
                   onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/kost_repository.dart';
 import 'package:kostrushapp/presentation/views/detail_dormitory/argument/detail_dormitory_argument.dart';
@@ -11,7 +12,7 @@ import '../../../../utils/handler/http_error_handler.dart';
 import '../../order_form/argument/order_form_argument.dart';
 
 /// Controller untuk halaman detail asrama.
-class DetailDormitoryController extends BaseController<DetailDormitoryArgument, KostResponse> {
+class DetailDormitoryController extends BaseController<DetailDormitoryArgument, KostDto> {
   late PageController pageController;
 
   final _repository = Get.find<KostRepository>();

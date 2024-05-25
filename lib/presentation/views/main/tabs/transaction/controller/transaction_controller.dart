@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kostrushapp/base/base_argument.dart';
+import 'package:kostrushapp/data/dto/transaction_dto.dart';
 import 'package:kostrushapp/data/model/profile_model.dart';
 import 'package:kostrushapp/data/network/response/transaction_response.dart';
 import 'package:kostrushapp/domain/repository/transaction_repository.dart';
@@ -12,7 +13,7 @@ import '../../../../detail_transaction/argument/detail_transaction_argument.dart
 
 /// Kelas [TransactionController] adalah pengontrol untuk tampilan transaksi.
 /// Kelas ini mengimplementasikan [BaseController] dengan argumen [NoArguments] dan hasil [List<TransactionResponse>].
-class TransactionController extends BaseController<NoArguments, List<TransactionResponse>> {
+class TransactionController extends BaseController<NoArguments, List<TransactionDto>> {
   final _repository = Get.find<TransactionRepository>();
 
   late ProfileModel profile;

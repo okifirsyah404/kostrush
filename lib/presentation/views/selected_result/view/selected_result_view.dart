@@ -54,7 +54,7 @@ class SelectedResultView extends BaseView<SelectedResultController> {
                 return Center(
                   child: DormCard(
                     type: kost?.type ?? "",
-                    price: kost?.startPrice ?? 0,
+                    price: kost!.startPrice ?? 0,
                     name: kost?.name ?? "",
                     address: kost?.address ?? "",
                     onTap: () {

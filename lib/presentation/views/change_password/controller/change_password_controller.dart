@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/profile_dto.dart';
 import 'package:kostrushapp/data/network/response/profile_response.dart';
 import 'package:kostrushapp/domain/repository/profile_repository.dart';
 import 'package:kostrushapp/presentation/views/change_password/argument/change_password_argument.dart';
@@ -10,7 +11,7 @@ import '../../../../utils/handler/http_error_handler.dart';
 import '../../success/argument/success_argument.dart';
 
 /// Controller untuk halaman perubahan kata sandi.
-class ChangePasswordController extends BaseController<ChangePasswordArgument, ProfileResponse> {
+class ChangePasswordController extends BaseController<ChangePasswordArgument, ProfileDto> {
   final _repository = Get.find<ProfileRepository>();
 
   late TextEditingController newPasswordController;

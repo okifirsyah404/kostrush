@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:kostrushapp/data/dto/transaction_dto.dart';
 
 import '../../data/local/share_pref/storage_preference.dart';
 import '../../data/network/request/transaction_request.dart';
@@ -24,7 +25,7 @@ class TransactionRepository {
   /// Fungsi ini akan mengambil daftar transaksi dari server menggunakan token sesi yang tersimpan.
   /// Jika berhasil, fungsi akan mengembalikan daftar transaksi dalam bentuk `List<TransactionResponse>`.
   /// Jika terjadi kesalahan, fungsi akan mengembalikan `DioException`.
-  Future<Either<DioException, List<TransactionResponse>>>
+  Future<Either<DioException, List<TransactionDto>>>
       getTransactions() async {
     try {
       /// Mengambil token dari SharedPreference
@@ -36,8 +37,10 @@ class TransactionRepository {
         token: "Bearer $token",
       );
 
+      final data = response.data?.map((e) => TransactionDto.fromResponse(e)).toList();
+
       /// Mengembalikan daftar transaksi jika permintaan berhasil
-      return Right(response.data!);
+      return Right(data!);
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -64,7 +67,7 @@ class TransactionRepository {
   ///   // Tangani kesalahan
   /// }
   /// ```
-  Future<Either<DioException, TransactionResponse>> getTransactionById(
+  Future<Either<DioException, TransactionDto>> getTransactionById(
       int id) async {
     try {
       /// Mengambil token dari SharedPreference
@@ -78,7 +81,7 @@ class TransactionRepository {
       );
 
       /// Mengembalikan response dari server
-      return Right(response.data!);
+      return Right(TransactionDto.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -96,7 +99,7 @@ class TransactionRepository {
   ///
   /// Mengembalikan `Future<Either<DioException, TransactionResponse>>` yang berisi hasil transaksi yang berhasil dibuat.
   /// Jika terjadi error, akan mengembalikan `Left` dengan `DioException` yang terjadi.
-  Future<Either<DioException, TransactionResponse>> createTransaction({
+  Future<Either<DioException, TransactionDto>> createTransaction({
     required int kostId,
     required int roomId,
     required int price,
@@ -129,7 +132,7 @@ class TransactionRepository {
       );
 
       /// Mengembalikan response dari server
-      return Right(response.data!);
+      return Right(TransactionDto.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);

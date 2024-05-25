@@ -6,7 +6,7 @@ part 'profile_response.g.dart';
 /// Kelas yang merepresentasikan respons profil pengguna.
 @JsonSerializable()
 class ProfileResponse {
-  final int? id;
+  final dynamic id;
   final String? name;
   final String? email;
   @JsonKey(name: 'alamat')

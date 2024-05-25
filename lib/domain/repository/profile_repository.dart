@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:kostrushapp/data/dto/profile_dto.dart';
 import 'package:kostrushapp/data/enum/gender_enum.dart';
 import 'package:kostrushapp/data/local/dao/profile_dao.dart';
 import 'package:kostrushapp/data/local/share_pref/storage_preference.dart';
@@ -83,7 +84,7 @@ class ProfileRepository {
   /// Mengembalikan [Future] yang berisi [Either] dari [DioException] dan [ProfileResponse].
   /// Jika update berhasil, akan mengembalikan [Right] dengan data profil yang diperbarui.
   /// Jika terjadi [DioException], akan mengembalikan [Left] dengan exception yang terjadi.
-  Future<Either<DioException, ProfileResponse>> updateProfile({
+  Future<Either<DioException, ProfileDto>> updateProfile({
     required String name,
     required String email,
     required String address,
@@ -111,7 +112,7 @@ class ProfileRepository {
       );
 
       /// Mengembalikan response dari server
-      return Right(response.data!);
+      return Right(ProfileDto.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -136,7 +137,7 @@ class ProfileRepository {
   ///   (response) => print("Password berhasil diubah: $response"),
   /// );
   /// ```
-  Future<Either<DioException, ProfileResponse>> changePassword({
+  Future<Either<DioException, ProfileDto>> changePassword({
     required String password,
   }) async {
     try {
@@ -151,7 +152,7 @@ class ProfileRepository {
       );
 
       /// Mengembalikan response dari server
-      return Right(response.data!);
+      return Right(ProfileDto.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);

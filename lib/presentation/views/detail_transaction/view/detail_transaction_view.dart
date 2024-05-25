@@ -174,7 +174,7 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
               ),
               const Spacer(),
               Text(
-                (controller.state?.total ?? 0).toRupiah(),
+                ( controller.state?.total ?? 0).toRupiah(),
                 style: TypographyTheme.labelLarge,
               ),
             ],
