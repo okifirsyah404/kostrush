@@ -7,9 +7,9 @@ part of 'room_response.dart';
 // **************************************************************************
 
 RoomResponse _$RoomResponseFromJson(Map<String, dynamic> json) => RoomResponse(
-      id: (json['id_kamar'] as num?)?.toInt(),
+      id: json['id_kamar'],
       name: json['nama_kamar'] as String?,
-      price: (json['harga'] as num?)?.toInt(),
+      price: json['harga'],
       facility: json['fasilitas'] as String?,
       status: json['status_kamar'] as String?,
     );

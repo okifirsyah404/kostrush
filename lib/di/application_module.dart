@@ -39,7 +39,7 @@ Future<void> initApplicationModule() async {
   /// Menambahkan interceptor untuk logging request dan response menggunakan PrettyDioLogger.
   await Get.putAsync(
     () async => Dio()
-        .addBaseUrl("https://a486-118-99-121-212.ngrok-free.app")
+        .addBaseUrl("https://kostrush.tifnganjuk.com")
         .addInterceptor(
           PrettyDioLogger(
             request: true,

@@ -8,7 +8,7 @@ part 'kost_response.g.dart';
 class KostResponse {
   /// ID dari kost.
   @JsonKey(name: 'id_kost')
-  final int? id;
+  final dynamic id;
 
   /// Nama dari kost.
   @JsonKey(name: 'nama_kost')
@@ -36,11 +36,11 @@ class KostResponse {
 
   /// Harga terendah dari kost.
   @JsonKey(name: "harga_terendah")
-  final int? startPrice;
+  final String? startPrice;
 
   /// Harga tertinggi dari kost.
   @JsonKey(name: "harga_tertinggi")
-  final int? endPrice;
+  final String? endPrice;
 
   /// Daftar kamar yang tersedia di kost.
   @JsonKey(name: 'kamar')
